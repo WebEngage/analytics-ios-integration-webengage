@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://segment.com"
   s.license          = { :type => "MIT" }
   s.author           = { "Arpit Agrawal" => "arpit@webklipper.com" }
-  s.source           = { :git => "https://github.com/WebEngage/Segment-WebEngage.git", 
+  s.source           = { :git => "https://github.com/WebEngage/analytics-ios-integration-webengage.git", 
                           :tag => s.version.to_s }
   s.social_media_url = "https://twitter.com/segment"
 
