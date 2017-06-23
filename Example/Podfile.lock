@@ -1,0 +1,26 @@
+PODS:
+  - Analytics (3.6.1)
+  - Segment-WebEngage (1.0.0):
+    - Segment-WebEngage/Xcode8 (= 1.0.0)
+  - Segment-WebEngage/Xcode8 (1.0.0):
+    - Analytics
+    - WebEngage (~> 3.5.6)
+  - WebEngage (3.5.6):
+    - WebEngage/Xcode8 (= 3.5.6)
+  - WebEngage/Xcode8 (3.5.6)
+
+DEPENDENCIES:
+  - Segment-WebEngage (from `../`)
+
+EXTERNAL SOURCES:
+  Segment-WebEngage:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Analytics: 32f2d1e0e5499c493450192726b0b42d43606b82
+  Segment-WebEngage: 3deb0b8b77e0f8440208273cdadb627ab627e10b
+  WebEngage: bdc49b35fc41bbb5b1967ac74d2bf6afe6e79662
+
+PODFILE CHECKSUM: 515f02095fb004d1241c18a6798b12a01db5ab08
+
+COCOAPODS: 1.2.1

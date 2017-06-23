@@ -1,29 +1,49 @@
 # Segment-WebEngage
 
-[![CI Status](http://img.shields.io/travis/weg-arpit/Segment-WebEngage.svg?style=flat)](https://travis-ci.org/weg-arpit/Segment-WebEngage)
+[![CI Status](http://img.shields.io/travis/segment-integrations/analytics-ios-integration-webengage.svg?style=flat)](https://travis-ci.org/segment-integrations/analytics-ios-integration-webengage)
 [![Version](https://img.shields.io/cocoapods/v/Segment-WebEngage.svg?style=flat)](http://cocoapods.org/pods/Segment-WebEngage)
 [![License](https://img.shields.io/cocoapods/l/Segment-WebEngage.svg?style=flat)](http://cocoapods.org/pods/Segment-WebEngage)
-[![Platform](https://img.shields.io/cocoapods/p/Segment-WebEngage.svg?style=flat)](http://cocoapods.org/pods/Segment-WebEngage)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
+WebEngage integration for analytics-ios.
 
 ## Installation
 
-Segment-WebEngage is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+To install the Segment-WebEngage integration, simply add this line to your [CocoaPods](http://cocoapods.org) `Podfile`:
 
 ```ruby
 pod "Segment-WebEngage"
 ```
+If you are using XCode 7 use:
 
-## Author
+```ruby
+pod "Segment-WebEngage/Xcode7"
+```
 
-weg-arpit, arpit@webklipper.com
+## Usage
 
-## License
+After adding the dependency, you must register the integration with our SDK.  To do this, import the WebEngage integration in your `AppDelegate`:
 
-Segment-WebEngage is available under the MIT license. See the LICENSE file for more info.
+```
+#import <Segment-WebEngage/WEGSegmentIntegrationFactory.h>
+```
+
+And add the following lines to your AppDelegate's application:didFinishLaunching:WithOptions: method
+
+```
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //Initialise Segment
+    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:@"XXXXXXXXXXXXXXXXXXXXXXXXXXX"];
+    
+    //Additional Segment Configuration
+    configuration.trackApplicationLifecycleEvents = NO; // Enable this to record certain application events automatically!
+    configuration.recordScreenViews = NO; // Enable this to record screen views automatically!
+    
+    //Register WebEngage Integration With Segment
+    [configuration use:[WEGSegmentIntegrationFactory instanceWithApplication:application launchOptions:launchOptions]];
+    
+    [SEGAnalytics setupWithConfiguration:configuration];
+    
+    return YES;
+}
+```
