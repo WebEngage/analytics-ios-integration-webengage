@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Segment-WebEngage_Example' do
+  pod 'Segment-WebEngage', :path => '../'
+
+  target 'Segment-WebEngage_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
