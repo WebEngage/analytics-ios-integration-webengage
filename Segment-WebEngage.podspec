@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Segment-WebEngage"
-  s.version          = "1.0.0"
+  s.version          = "1.0.1"
   s.summary          = "WebEngage Integration for Segment's analytics-ios library"
 
   s.description      = <<-DESC
@@ -8,7 +8,6 @@ Pod::Spec.new do |s|
                         Segment.com to provide WebEngage SDK functionality using the 
                         analytics-ios APIs.
                        DESC
-
   s.homepage         = "https://segment.com"
   s.license          = { :type => "MIT" }
   s.author           = { "Arpit Agrawal" => "arpit@webklipper.com" }
@@ -28,6 +27,10 @@ Pod::Spec.new do |s|
   s.subspec 'Xcode8' do |xc8|
     xc8.dependency 'WebEngage', '~> 3.5.6'
     xc8.dependency 'Analytics'
+  end
+
+  s.subspec 'NoWebEngage' do |o|
+    o.dependency 'Analytics'
   end
 
   s.default_subspec = 'Xcode8'
