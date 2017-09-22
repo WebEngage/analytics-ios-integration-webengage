@@ -10,8 +10,8 @@
 #import <Analytics/SEGIntegration.h>
 #import <WebEngage/WebEngage.h>
 
-#define WEG_SEGMENT_FIRST_NAME_KEY @"firstName"
-#define WEG_SEGMENT_LAST_NAME_KEY @"lastName"
+#define WEG_SEGMENT_FIRST_NAME_KEY @"first_name"
+#define WEG_SEGMENT_LAST_NAME_KEY @"last_name"
 #define WEG_SEGMENT_NAME_KEY @"name"
 #define WEG_SEGMENT_EMAIL_KEY @"email"
 #define WEG_SEGMENT_PHONE_KEY @"phone"
