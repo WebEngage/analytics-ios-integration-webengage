@@ -5,7 +5,8 @@ target 'Segment-WebEngage_Example' do
 
   target 'Segment-WebEngage_Tests' do
     inherit! :search_paths
-
+    pod 'Expecta', '~> 1.0'   # expecta matchers
+    pod 'OCMock', '~> 3.2'   # OCMock
     
   end
 end
