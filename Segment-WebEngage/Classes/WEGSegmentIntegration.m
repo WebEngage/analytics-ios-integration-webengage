@@ -32,12 +32,12 @@
     NSMutableDictionary* traitsCopy = [payload.traits mutableCopy];
     
     // While I don't believe this is necessary, we can ensure the value is of type NSString with stringValue
-    NSString* firstName = [traits[WEG_SEGMENT_FIRST_NAME_KEY] stringValue];
+    NSString* firstName = [self getStringValue:traits[WEG_SEGMENT_FIRST_NAME_KEY]];
     if (firstName) {
         [user setFirstName:firstName];
     }
     
-    NSString* lastName = [traits[WEG_SEGMENT_LAST_NAME_KEY] stringValue];
+    NSString* lastName = [self getStringValue:traits[WEG_SEGMENT_LAST_NAME_KEY]];
     if (lastName) {
         [user setLastName:lastName];
     }
@@ -47,7 +47,7 @@
     // then set it
     if (!firstName && !lastName) {
         
-        NSString* name = [traits[WEG_SEGMENT_NAME_KEY] stringValue];
+        NSString* name = [self getStringValue:traits[WEG_SEGMENT_NAME_KEY]];
         if (!name) {
             return;
         }
@@ -69,12 +69,12 @@
             [user setLastName:lastName];
         }
         
-        NSString* email = [traits[WEG_SEGMENT_EMAIL_KEY] stringValue];
+        NSString* email = [self getStringValue:traits[WEG_SEGMENT_EMAIL_KEY]];
         if (email) {
             [user setEmail:email];
         }
         
-        NSString* gender = [traits[WEG_SEGMENT_GENDER_KEY] stringValue];
+        NSString* gender = [self getStringValue:traits[WEG_SEGMENT_GENDER_KEY]];
         if (gender) {
             if([gender caseInsensitiveCompare:@"male"] == NSOrderedSame || [gender caseInsensitiveCompare:@"m"] == NSOrderedSame) {
                 [user setGender:@"male"];
@@ -85,12 +85,12 @@
             }
         }
         
-        NSString* company = [traits[WEG_SEGMENT_COMPANY_KEY] stringValue];
+        NSString* company = [self getStringValue:traits[WEG_SEGMENT_COMPANY_KEY]];
         if (company) {
             [user setCompany:company];
         }
         
-        NSString* phone = [traits[WEG_SEGMENT_PHONE_KEY] stringValue];
+        NSString* phone = [self getStringValue:traits[WEG_SEGMENT_PHONE_KEY]];
         if (phone) {
             [user setPhone:traits[WEG_SEGMENT_PHONE_KEY]];
         }
@@ -121,12 +121,12 @@
         
         
         NSDictionary* integration = [payload.integrations valueForKey:@"WebEngage"];
-        NSString* wegHashEmail = [integration[WEG_HASHED_EMAIL_KEY] stringValue];
+        NSString* wegHashEmail = [self getStringValue:integration[WEG_HASHED_EMAIL_KEY]];
         if (wegHashEmail) {
             [user setHashedEmail:wegHashEmail];
         }
         
-        NSString* wegHashedPhoneKey = [integration[WEG_HASHED_PHONE_KEY] stringValue];
+        NSString* wegHashedPhoneKey = [self getStringValue:integration[WEG_HASHED_PHONE_KEY]];
         if (wegHashedPhoneKey) {
             [user setHashedPhone:wegHashedPhoneKey];
         }
@@ -256,4 +256,12 @@
     SEGLog(@"WebEngage SDK does not support the `alias` operation");
 }
 
+-(NSString *)getStringValue:(id) input{
+    if ([input isKindOfClass:[NSString class]]) {
+        return input;
+    }
+    else{
+        return [input stringValue];
+    }
+}
 @end

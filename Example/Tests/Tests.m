@@ -79,5 +79,8 @@
     OCMVerify([wegUserMock setPhone:[OCMArg isEqual:@"0918273645"]]);
     OCMVerify([wegUserMock setGender:[OCMArg isEqual:@"female"]]);
 }
+
+-(void)
+
 @end
 
