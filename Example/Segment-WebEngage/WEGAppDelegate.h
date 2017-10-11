@@ -7,7 +7,8 @@
 //
 
 @import UIKit;
-
+#import <Analytics/SEGAnalytics.h>
+#import <Segment-WebEngage/WEGSegmentIntegrationFactory.h>
 @interface WEGAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

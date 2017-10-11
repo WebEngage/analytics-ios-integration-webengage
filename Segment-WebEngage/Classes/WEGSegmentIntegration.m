@@ -31,7 +31,6 @@
     }
     NSMutableDictionary* traitsCopy = [payload.traits mutableCopy];
     
-    // While I don't believe this is necessary, we can ensure the value is of type NSString with stringValue
     NSString* firstName = [self getStringValue:traits[WEG_SEGMENT_FIRST_NAME_KEY]];
     if (firstName) {
         [user setFirstName:firstName];
@@ -68,7 +67,7 @@
         if (lastName && lastName.length > 0) {
             [user setLastName:lastName];
         }
-        
+    }
         NSString* email = [self getStringValue:traits[WEG_SEGMENT_EMAIL_KEY]];
         if (email) {
             [user setEmail:email];
@@ -166,6 +165,7 @@
 
         // Do we not want to remove WEG_SEGMENT_FIRST_NAME_KEY as well?
         [traitsCopy removeObjectForKey:WEG_SEGMENT_LAST_NAME_KEY];
+        [traitsCopy removeObjectForKey:WEG_SEGMENT_FIRST_NAME_KEY];
         [traitsCopy removeObjectForKey:WEG_SEGMENT_NAME_KEY];
         [traitsCopy removeObjectForKey:WEG_SEGMENT_EMAIL_KEY];
         [traitsCopy removeObjectForKey:WEG_SEGMENT_GENDER_KEY];
@@ -194,8 +194,6 @@
             }
             
         }];
-        
-    }
 }
 
 - (void)track:(SEGTrackPayload *)payload {
@@ -248,6 +246,30 @@
     SEGLog(@"[[WebEngage sharedInstance].user logout]");
 }
 
+- (void)registeredForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    SEGLog(@"didRegisterForRemoteNotificationsWithDeviceToken Callback from Segment");
+    NSString* dToken = [self hexRepresentationForData:deviceToken];
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    BOOL tokenRefreshRequired = NO;
+    if ([preferences objectForKey:@"gcm_registered_token"] == nil) {
+        SEGLog(@"No cached APNS token found");
+        tokenRefreshRequired = YES;
+    } else {
+        NSString* cachedToken = [preferences stringForKey:@"gcm_registered_token"];
+        if (![cachedToken isEqualToString:dToken]) {
+            tokenRefreshRequired = YES;
+            SEGLog(@"Cached APNS token different from current token");
+        } else {
+            SEGLog(@"Cached APNS token same as current token");
+        }
+    }
+    if (tokenRefreshRequired) {
+        [[WebEngage sharedInstance].analytics trackEventWithName:@"we_gcm_registered" andValue:@{@"event_data_overrides" : @{@"gcm_regId" : dToken}}];
+        [preferences setObject:dToken forKey:@"gcm_registered_token"];
+        [preferences synchronize];
+    }
+}
+
 - (void)group:(SEGGroupPayload *)payload {
     SEGLog(@"WebEngage SDK does not support the `group` operation");
 }
@@ -263,5 +285,19 @@
     else{
         return [input stringValue];
     }
+}
+
+-(NSString*)hexRepresentationForData:(NSData*)data
+{
+    const unsigned char* bytes = (const unsigned char*)[data bytes];
+    NSUInteger nbBytes = [data length];
+    NSUInteger strLen = 2*nbBytes;
+    
+    NSMutableString* hex = [[NSMutableString alloc] initWithCapacity:strLen];
+    for(NSUInteger i=0; i<nbBytes; ) {
+        [hex appendFormat:@"%02X", bytes[i]];
+        ++i;
+    }
+    return hex;
 }
 @end

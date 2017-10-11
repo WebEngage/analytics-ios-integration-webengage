@@ -1,7 +1,10 @@
 #use_frameworks!
+source 'https://github.com/WebEngage/podspecs.git'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Segment-WebEngage_Example' do
   pod 'Segment-WebEngage', :path => '../'
+  pod 'WebEngage'
 
   target 'Segment-WebEngage_Tests' do
     inherit! :search_paths

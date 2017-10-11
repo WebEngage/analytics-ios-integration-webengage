@@ -7,7 +7,14 @@
 //
 
 #import "WEGSegmentIntegrationFactory.h"
+#import <Analytics/SEGAnalyticsUtils.h>
 
+@interface WEGSegmentIntegrationFactory()
+@property (nonatomic,strong, readwrite) UIApplication* application;
+@property (nonatomic,strong, readwrite) NSDictionary* launchOptions;
+@property (nonatomic,strong, readwrite) id<WEGInAppNotificationProtocol> notificationDelegate;
+@property (nonatomic, readwrite) BOOL autoAPNSRegister;
+@end
 
 @implementation WEGSegmentIntegrationFactory
 
@@ -54,29 +61,33 @@
                           launchOptions:(NSDictionary*) launchOptions
                    notificationDelegate:(id<WEGInAppNotificationProtocol>) notificationDelegate
                        autoAPNSRegister:(BOOL) autoRegister {
+    WEGSegmentIntegrationFactory* factory = [self sharedInstance];
+    factory.application = application;
+    factory.launchOptions = launchOptions;
+    factory.notificationDelegate = notificationDelegate;
+    factory.autoAPNSRegister = autoRegister;
     
-    
-    
-    [[WebEngage sharedInstance] application:application
-              didFinishLaunchingWithOptions:launchOptions
-                       notificationDelegate:notificationDelegate
-                               autoRegister:autoRegister];
-    
-    return [self sharedInstance];
-}
-
-- (id)init {
-    
-    self = [super init];
-    return self;
+    return factory;
 }
 
 - (id<SEGIntegration>)createWithSettings:(NSDictionary *)settings forAnalytics:(SEGAnalytics *)analytics {
-    return [[WEGSegmentIntegration alloc] init];
+    BOOL __block isInited = NO;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        isInited = [[WebEngage sharedInstance] application:self.application
+                             didFinishLaunchingWithOptions:@{@"WebEngage":settings?settings:@{},
+                                                  @"launchOptions":self.launchOptions?self.launchOptions:@{}}
+                           notificationDelegate:self.notificationDelegate
+                                              autoRegister:self.autoAPNSRegister];
+    });
+    if(isInited){
+        return [[WEGSegmentIntegration alloc] init];
+    } else {
+        SEGLog(@"Could Not Initialize WebEngage");
+        return nil;
+    }
 }
 
 - (NSString *)key {
-    
     return @"WebEngage";
 }
 
