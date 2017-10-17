@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Segment-WebEngage"
-  s.version          = "1.0.2"
+  s.version          = "1.0.3"
   s.summary          = "WebEngage Integration for Segment's analytics-ios library"
 
   s.description      = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
                           :tag => s.version.to_s }
   s.social_media_url = "https://twitter.com/segment"
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '8.0'
 
   s.source_files = 'Segment-WebEngage/Classes/**/*'
   
