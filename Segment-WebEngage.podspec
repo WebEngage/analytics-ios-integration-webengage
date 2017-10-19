@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Segment-WebEngage"
-  s.version          = "1.0.3"
+  s.version          = "1.0.4"
   s.summary          = "WebEngage Integration for Segment's analytics-ios library"
 
   s.description      = <<-DESC
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                         Segment.com to provide WebEngage SDK functionality using the 
                         analytics-ios APIs.
                        DESC
-  s.homepage         = "https://segment.com"
+  s.homepage         = "https://docs.webengage.com/docs/segment-advanced-integration#section-ios"
   s.license          = { :type => "MIT" }
   s.author           = { "Saumitra Bhave" => "saumitra@webklipper.com" }
   s.source           = { :git => "https://github.com/WebEngage/analytics-ios-integration-webengage.git", 

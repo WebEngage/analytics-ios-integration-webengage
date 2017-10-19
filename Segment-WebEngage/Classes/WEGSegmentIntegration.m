@@ -116,9 +116,11 @@
                                         1000];
     } else if ([birthDay isKindOfClass:[NSString class]]) {
       // assumption is ISO Date format
-      NSISO8601DateFormatter *dateFormat =
-          [[NSISO8601DateFormatter alloc] init];
-      date = [dateFormat dateFromString:birthDay];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+        [dateFormatter setLocale:enUSPOSIXLocale];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"];
+        date = [dateFormatter dateFromString:birthDay];
     } else if ([birthDay isKindOfClass:[NSDate class]]) {
       date = birthDay;
     }
