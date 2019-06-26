@@ -6,7 +6,7 @@
 [![LastUpdated](https://img.shields.io/github/last-commit/WebEngage/analytics-ios-integration-webengage.svg)](https://cocoapods.org/pods/Segment-WebEngage)
 
 
-WebEngage integration for [analytics-ios](https://github.com/segmentio/analytics-ios).
+WebEngage integration for Segment's [analytics-ios SDK](https://github.com/segmentio/analytics-ios).
 
 Check out more information [here](https://docs.webengage.com/docs/segment).
 
