@@ -7,8 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-typedef NSMutableURLRequest * _Nonnull(^SEGRequestFactory)(NSURL * _Nonnull);
+@protocol SEGApplicationProtocol <NSObject>
+@property (nullable, nonatomic, assign) id<UIApplicationDelegate> delegate;
+- (UIBackgroundTaskIdentifier)seg_beginBackgroundTaskWithName:(nullable NSString *)taskName expirationHandler:(void (^__nullable)(void))handler;
+- (void)seg_endBackgroundTask:(UIBackgroundTaskIdentifier)identifier;
+@end
+
+
+@interface UIApplication (SEGApplicationProtocol) <SEGApplicationProtocol>
+@end
+
+typedef NSMutableURLRequest *_Nonnull (^SEGRequestFactory)(NSURL *_Nonnull);
 
 @protocol SEGIntegrationFactory;
 @protocol SEGCrypto;
@@ -24,7 +35,7 @@ typedef NSMutableURLRequest * _Nonnull(^SEGRequestFactory)(NSURL * _Nonnull);
  *
  * @param writeKey Your project's write key from segment.io.
  */
-+ (_Nonnull instancetype)configurationWithWriteKey:(NSString * _Nonnull)writeKey;
++ (_Nonnull instancetype)configurationWithWriteKey:(NSString *_Nonnull)writeKey;
 
 /**
  * Your project's write key from segment.io.
@@ -111,5 +122,36 @@ typedef NSMutableURLRequest * _Nonnull(^SEGRequestFactory)(NSURL * _Nonnull);
  * Register a factory that can be used to create an integration.
  */
 - (void)use:(id<SEGIntegrationFactory> _Nonnull)factory;
+
+/**
+ * Leave this nil for iOS extensions, otherwise set to UIApplication.sharedApplication.
+ */
+@property (nonatomic, strong, nullable) id<SEGApplicationProtocol> application;
+
+/**
+ * A dictionary of filters to redact payloads before they are sent.
+ * This is an experimental feature that currently only applies to Deep Links.
+ * It is subject to change to allow for more flexible customizations in the future.
+ *
+ * The key of this dictionary should be a regular expression string pattern,
+ * and the value should be a regular expression substitution template.
+ *
+ * By default, this contains a Facebook auth token filter, configured as such:
+ * @code
+ * @"(fb\\d+://authorize#access_token=)([^ ]+)": @"$1((redacted/fb-auth-token))"
+ * @endcode
+ *
+ * This will replace any matching occurences to a redacted version:
+ * @code
+ * "fb123456789://authorize#access_token=secretsecretsecretsecret&some=data"
+ * @endcode
+ *
+ * Becomes:
+ * @code
+ * "fb123456789://authorize#access_token=((redacted/fb-auth-token))"
+ * @endcode
+ *
+ */
+@property (nonatomic, strong, nonnull) NSDictionary<NSString*, NSString*>* payloadFilters;
 
 @end
