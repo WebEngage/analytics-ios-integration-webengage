@@ -1,15 +1,15 @@
-#use_frameworks!
-source 'https://github.com/WebEngage/podspecs.git'
-source 'https://github.com/CocoaPods/Specs.git'
+
+# Avoid use_frameworks! declaration in your Podfile
+
+platform :ios, '9.0'
 
 target 'Segment-WebEngage_Example' do
+
   pod 'Segment-WebEngage', :path => '../'
-  pod 'WebEngage'
 
   target 'Segment-WebEngage_Tests' do
     inherit! :search_paths
-    pod 'Expecta', '~> 1.0'   # expecta matchers
-    pod 'OCMock', '~> 3.2'   # OCMock
-    
+    pod 'Expecta'
+    pod 'OCMock'
   end
 end

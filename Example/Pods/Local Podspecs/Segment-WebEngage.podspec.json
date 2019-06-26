@@ -1,42 +1,31 @@
 {
   "name": "Segment-WebEngage",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "summary": "WebEngage Integration for Segment's analytics-ios library",
-  "description": "WebEngage integration for analytics-ios library provided by\nSegment.com to provide WebEngage SDK functionality using the \nanalytics-ios APIs.",
-  "homepage": "https://segment.com",
-  "license": {
-    "type": "MIT"
-  },
-  "authors": {
-    "Arpit Agrawal": "arpit@webklipper.com"
-  },
+  "description": "WebEngage integration for analytics-ios library provided by\nSegment.com to provide WebEngage SDK functionality using the\nanalytics-ios APIs.",
+  "license": "MIT",
+  "homepage": "https://webengage.com",
+  "social_media_url": "http://twitter.com/webengage",
+  "documentation_url": "https://docs.webengage.com/docs/segment-advanced-integration#section-ios",
+  "authors": [
+    "Saumitra Bhave",
+    "Yogesh Singh"
+  ],
   "source": {
     "git": "https://github.com/WebEngage/analytics-ios-integration-webengage.git",
-    "tag": "1.0.1"
-  },
-  "social_media_url": "https://twitter.com/segment",
-  "platforms": {
-    "ios": "7.0"
+    "tag": "1.0.4"
   },
   "source_files": "Segment-WebEngage/Classes/**/*",
-  "default_subspecs": "Xcode8",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "default_subspecs": "Xcode10",
   "subspecs": [
     {
-      "name": "Xcode7",
-      "dependencies": {
-        "WebEngage/Xcode7": [
-          "~> 3.5.6"
-        ],
-        "Analytics": [
-
-        ]
-      }
-    },
-    {
-      "name": "Xcode8",
+      "name": "Xcode10",
       "dependencies": {
         "WebEngage": [
-          "~> 3.5.6"
+
         ],
         "Analytics": [
 
@@ -44,8 +33,11 @@
       }
     },
     {
-      "name": "NoWebEngage",
+      "name": "Xcode9",
       "dependencies": {
+        "WebEngage/Xcode9": [
+
+        ],
         "Analytics": [
 
         ]

@@ -14,6 +14,7 @@
 #import "SEGMiddleware.h"
 #import "SEGContext.h"
 #import "SEGIntegrationsManager.h"
+#import "Internal/SEGUtils.h"
 
 static SEGAnalytics *__sharedInstance = nil;
 
@@ -52,19 +53,22 @@ static SEGAnalytics *__sharedInstance = nil;
         self.integrationsManager = [[SEGIntegrationsManager alloc] initWithAnalytics:self];
 
         self.runner = [[SEGMiddlewareRunner alloc] initWithMiddlewares:
-                       [configuration.middlewares ?: @[] arrayByAddingObject:self.integrationsManager]];
+                                                       [configuration.middlewares ?: @[] arrayByAddingObject:self.integrationsManager]];
 
         // Attach to application state change hooks
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
         // Pass through for application state change events
-        for (NSString *name in @[ UIApplicationDidEnterBackgroundNotification,
-                                  UIApplicationDidFinishLaunchingNotification,
-                                  UIApplicationWillEnterForegroundNotification,
-                                  UIApplicationWillTerminateNotification,
-                                  UIApplicationWillResignActiveNotification,
-                                  UIApplicationDidBecomeActiveNotification ]) {
-            [nc addObserver:self selector:@selector(handleAppStateNotification:) name:name object:nil];
+        id<SEGApplicationProtocol> application = configuration.application;
+        if (application) {
+            for (NSString *name in @[ UIApplicationDidEnterBackgroundNotification,
+                                      UIApplicationDidFinishLaunchingNotification,
+                                      UIApplicationWillEnterForegroundNotification,
+                                      UIApplicationWillTerminateNotification,
+                                      UIApplicationWillResignActiveNotification,
+                                      UIApplicationDidBecomeActiveNotification ]) {
+                [nc addObserver:self selector:@selector(handleAppStateNotification:) name:name object:application];
+            }
         }
 
         if (configuration.recordScreenViews) {
@@ -110,11 +114,12 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
     }
 }
 
-- (void)_applicationDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (void)_applicationDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     if (!self.configuration.trackApplicationLifecycleEvents) {
         return;
     }
-        // Previously SEGBuildKey was stored an integer. This was incorrect because the CFBundleVersion
+    // Previously SEGBuildKey was stored an integer. This was incorrect because the CFBundleVersion
     // can be a string. This migrates SEGBuildKey to be stored as a string.
     NSInteger previousBuildV1 = [[NSUserDefaults standardUserDefaults] integerForKey:SEGBuildKeyV1];
     if (previousBuildV1) {
@@ -130,24 +135,24 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
 
     if (!previousBuildV2) {
         [self track:@"Application Installed" properties:@{
-            @"version" : currentVersion ?: [NSNull null],
-            @"build" : currentBuild ?: [NSNull null],
+            @"version" : currentVersion ?: @"",
+            @"build" : currentBuild ?: @"",
         }];
     } else if (![currentBuild isEqualToString:previousBuildV2]) {
         [self track:@"Application Updated" properties:@{
-            @"previous_version" : previousVersion ?: [NSNull null],
-            @"previous_build" : previousBuildV2 ?: [NSNull null],
-            @"version" : currentVersion ?: [NSNull null],
-            @"build" : currentBuild ?: [NSNull null],
+            @"previous_version" : previousVersion ?: @"",
+            @"previous_build" : previousBuildV2 ?: @"",
+            @"version" : currentVersion ?: @"",
+            @"build" : currentBuild ?: @"",
         }];
     }
 
     [self track:@"Application Opened" properties:@{
-        @"from_background": @NO,
-        @"version" : currentVersion ?: [NSNull null],
-        @"build" : currentBuild ?: [NSNull null],
-        @"referring_application": launchOptions[UIApplicationLaunchOptionsSourceApplicationKey] ?: [NSNull null],
-        @"url": launchOptions[UIApplicationLaunchOptionsURLKey] ?: [NSNull null],
+        @"from_background" : @NO,
+        @"version" : currentVersion ?: @"",
+        @"build" : currentBuild ?: @"",
+        @"referring_application" : launchOptions[UIApplicationLaunchOptionsSourceApplicationKey] ?: @"",
+        @"url" : launchOptions[UIApplicationLaunchOptionsURLKey] ?: @"",
     }];
 
 
@@ -157,16 +162,17 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)_applicationWillEnterForeground {
+- (void)_applicationWillEnterForeground
+{
     if (!self.configuration.trackApplicationLifecycleEvents) {
         return;
     }
     NSString *currentVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
     NSString *currentBuild = [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
     [self track:@"Application Opened" properties:@{
-        @"from_background": @YES,
-        @"version" : currentVersion ?: [NSNull null],
-        @"build" : currentBuild  ?: [NSNull null],
+        @"from_background" : @YES,
+        @"version" : currentVersion ?: @"",
+        @"build" : currentBuild ?: @"",
     }];
 }
 
@@ -339,6 +345,8 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
         [properties addEntriesFromDictionary:activity.userInfo];
         properties[@"url"] = activity.webpageURL.absoluteString;
         properties[@"title"] = activity.title ?: @"";
+        properties = [SEGUtils traverseJSON:properties
+                      andReplaceWithFilters:self.configuration.payloadFilters];
         [self track:@"Deep Link Opened" properties:[properties copy]];
     }
 }
@@ -346,7 +354,8 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
 - (void)openURL:(NSURL *)url options:(NSDictionary *)options
 {
     SEGOpenURLPayload *payload = [[SEGOpenURLPayload alloc] init];
-    payload.url = url;
+    payload.url = [NSURL URLWithString:[SEGUtils traverseJSON:url.absoluteString
+                                        andReplaceWithFilters:self.configuration.payloadFilters]];
     payload.options = options;
     [self run:SEGEventTypeOpenURL payload:payload];
 
@@ -357,6 +366,8 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
     NSMutableDictionary *properties = [NSMutableDictionary dictionaryWithCapacity:options.count + 2];
     [properties addEntriesFromDictionary:options];
     properties[@"url"] = url.absoluteString;
+    properties = [SEGUtils traverseJSON:properties
+                  andReplaceWithFilters:self.configuration.payloadFilters];
     [self track:@"Deep Link Opened" properties:[properties copy]];
 }
 
@@ -405,7 +416,7 @@ NSString *const SEGBuildKeyV2 = @"SEGBuildKeyV2";
 
 + (NSString *)version
 {
-    return @"3.6.1";
+    return @"3.6.10";
 }
 
 #pragma mark - Helpers
