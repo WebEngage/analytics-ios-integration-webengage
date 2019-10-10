@@ -15,7 +15,6 @@
 			dependencies = (
 			);
 			name = WebEngage;
-			productName = WebEngage;
 		};
 /* End PBXAggregateTarget section */
 
@@ -290,11 +289,10 @@
 		04202186A9130CBDA14A73673A7FD35E /* SEGUserDefaultsStorage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGUserDefaultsStorage.h; path = Analytics/Classes/Internal/SEGUserDefaultsStorage.h; sourceTree = "<group>"; };
 		04751B3A2FD28B72684AC74F17FF6C50 /* EXPMatchers+raise.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+raise.h"; path = "Expecta/Matchers/EXPMatchers+raise.h"; sourceTree = "<group>"; };
 		0493A176B2D6CFF632B16DF3DBC3CCE2 /* EXPMatchers+beTruthy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beTruthy.m"; path = "Expecta/Matchers/EXPMatchers+beTruthy.m"; sourceTree = "<group>"; };
-		04F233908B42235F21AB3A819FB9BEC6 /* libSegment-WebEngage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libSegment-WebEngage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04F233908B42235F21AB3A819FB9BEC6 /* libSegment-WebEngage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libSegment-WebEngage.a"; path = "libSegment-WebEngage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05F9298ADE334E8A44B21494B028621E /* OCMLocation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMLocation.m; path = Source/OCMock/OCMLocation.m; sourceTree = "<group>"; };
 		06C468CE25D6ED8A6C7C4C95BF82D6F3 /* EXPMatchers+raise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+raise.m"; path = "Expecta/Matchers/EXPMatchers+raise.m"; sourceTree = "<group>"; };
-		08D5FBADA23AEC25AD659B034C16D3CF /* WebEngage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WebEngage.xcconfig; sourceTree = "<group>"; };
-		08F7F0770B4878B9883B87DCD8569CB4 /* libExpecta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libExpecta.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		08F7F0770B4878B9883B87DCD8569CB4 /* libExpecta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libExpecta.a; path = libExpecta.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A59D9041FEEBD828DE0590FEDAC0371 /* EXPExpect.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXPExpect.m; path = Expecta/EXPExpect.m; sourceTree = "<group>"; };
 		0A88DE716569823FAB1D491C5DFA5A4D /* Analytics.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Analytics.xcconfig; sourceTree = "<group>"; };
 		0C017E34740E0900C951C00981CE3E9F /* SEGFileStorage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGFileStorage.h; path = Analytics/Classes/Internal/SEGFileStorage.h; sourceTree = "<group>"; };
@@ -324,13 +322,14 @@
 		224350DE0BF49DDA354C4C03AA0B2DBF /* SEGAnalyticsUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGAnalyticsUtils.h; path = Analytics/Classes/Internal/SEGAnalyticsUtils.h; sourceTree = "<group>"; };
 		25B9C10B1BC0FE74C9D676244978DF35 /* Pods-Segment-WebEngage_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Segment-WebEngage_Example-dummy.m"; sourceTree = "<group>"; };
 		27AB329CB4C38505EDA6675FCEF05591 /* EXPBlockDefinedMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPBlockDefinedMatcher.h; path = Expecta/EXPBlockDefinedMatcher.h; sourceTree = "<group>"; };
-		29652044EC27F0E2983A4193C343320B /* libPods-Segment-WebEngage_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Segment-WebEngage_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29652044EC27F0E2983A4193C343320B /* libPods-Segment-WebEngage_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Segment-WebEngage_Tests.a"; path = "libPods-Segment-WebEngage_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1E88DB68771F9EC26CBECAF52ECDFA /* NSInvocation+OCMAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+OCMAdditions.h"; path = "Source/OCMock/NSInvocation+OCMAdditions.h"; sourceTree = "<group>"; };
 		2B6AB15DF2142CEB46FDA5CF03F3E14F /* OCMRecorder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMRecorder.m; path = Source/OCMock/OCMRecorder.m; sourceTree = "<group>"; };
 		2BDD2DBDB7EB2328E12C5EB28362A437 /* OCMock-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OCMock-prefix.pch"; sourceTree = "<group>"; };
 		2BECF14B70120F68997FC0BCC61E48E4 /* SEGAliasPayload.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SEGAliasPayload.h; path = Analytics/Classes/Integrations/SEGAliasPayload.h; sourceTree = "<group>"; };
 		2BF9C1AE16DA95EA8841DBD8E8508C5E /* Pods-Segment-WebEngage_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Segment-WebEngage_Tests-dummy.m"; sourceTree = "<group>"; };
-		2CE4B6165F426953A26419DF02AF0D93 /* libAnalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAnalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CE4B6165F426953A26419DF02AF0D93 /* libAnalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libAnalytics.a; path = libAnalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FB6CFF965DED2C69D30B372889A6E80 /* WebEngage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WebEngage.xcconfig; sourceTree = "<group>"; };
 		3313525E11966F2C154A058B8EFB4122 /* EXPDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPDefines.h; path = Expecta/EXPDefines.h; sourceTree = "<group>"; };
 		33299F0F1F0E6B846A1E5BC0FB298EBF /* SEGAnalyticsUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGAnalyticsUtils.m; path = Analytics/Classes/Internal/SEGAnalyticsUtils.m; sourceTree = "<group>"; };
 		33C4FC0FE34A9637EC54E4F69019301B /* EXPMatchers+respondTo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+respondTo.m"; path = "Expecta/Matchers/EXPMatchers+respondTo.m"; sourceTree = "<group>"; };
@@ -365,7 +364,7 @@
 		4DBABC86EB355FDB6BBFE11A65907BA9 /* NSObject+OCMAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+OCMAdditions.m"; path = "Source/OCMock/NSObject+OCMAdditions.m"; sourceTree = "<group>"; };
 		4DD5BE2CEE735D3F8D2AC55D85BFBF90 /* ExpectaSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ExpectaSupport.h; path = Expecta/ExpectaSupport.h; sourceTree = "<group>"; };
 		4DDA9F7888345DB55DBD3C8ED0E62B0A /* SEGScreenPayload.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGScreenPayload.m; path = Analytics/Classes/Integrations/SEGScreenPayload.m; sourceTree = "<group>"; };
-		4FE97ABA5C6DC5B3120677614C7F390F /* Segment-WebEngage.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = "Segment-WebEngage.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		4FE97ABA5C6DC5B3120677614C7F390F /* Segment-WebEngage.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = "Segment-WebEngage.podspec"; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		531A13CF5D828E24352E45E91422E64A /* EXPMatchers+respondTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+respondTo.h"; path = "Expecta/Matchers/EXPMatchers+respondTo.h"; sourceTree = "<group>"; };
 		543A0EA62C6A455E2BEA76394FB3A311 /* NSNotificationCenter+OCMAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSNotificationCenter+OCMAdditions.m"; path = "Source/OCMock/NSNotificationCenter+OCMAdditions.m"; sourceTree = "<group>"; };
 		544BA629B45745B4F109F45D3A5ABA18 /* OCMArgAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMArgAction.h; path = Source/OCMock/OCMArgAction.h; sourceTree = "<group>"; };
@@ -376,7 +375,7 @@
 		584589099E1C425C6A604AAF46E7CE18 /* EXPMatchers+beCloseTo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beCloseTo.m"; path = "Expecta/Matchers/EXPMatchers+beCloseTo.m"; sourceTree = "<group>"; };
 		58DF8E4C6CF430AB902F914BE946FC16 /* EXPMatchers+raiseWithReason.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+raiseWithReason.m"; path = "Expecta/Matchers/EXPMatchers+raiseWithReason.m"; sourceTree = "<group>"; };
 		61F5431A471159CE92CD882A561FC140 /* WEGSegmentIntegration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WEGSegmentIntegration.m; path = "Segment-WebEngage/Classes/WEGSegmentIntegration.m"; sourceTree = "<group>"; };
-		620D3F40099FAADF09701C9EDC2B2C1C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		620D3F40099FAADF09701C9EDC2B2C1C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		62EF819A74B3B16CF574C0CB0B6DA740 /* EXPMatchers+beNil.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beNil.h"; path = "Expecta/Matchers/EXPMatchers+beNil.h"; sourceTree = "<group>"; };
 		63310BFE4A0E14AFFF3D12D703789708 /* OCMFunctions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMFunctions.m; path = Source/OCMock/OCMFunctions.m; sourceTree = "<group>"; };
 		6472179F7ABEE3EF37C363CFBC2A3421 /* OCMBlockCaller.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMBlockCaller.m; path = Source/OCMock/OCMBlockCaller.m; sourceTree = "<group>"; };
@@ -389,7 +388,6 @@
 		6DD763B41050885F3B455C8539972A29 /* OCClassMockObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCClassMockObject.h; path = Source/OCMock/OCClassMockObject.h; sourceTree = "<group>"; };
 		6E487FE68DE4141EA8A97094F8F18039 /* OCMBlockArgCaller.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMBlockArgCaller.m; path = Source/OCMock/OCMBlockArgCaller.m; sourceTree = "<group>"; };
 		6E88EB11B65317051F0787799A3E0BAF /* EXPMatchers+beginWith.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beginWith.h"; path = "Expecta/Matchers/EXPMatchers+beginWith.h"; sourceTree = "<group>"; };
-		6EBA749D0C35656213D2837ADD3D2FFD /* WebEngage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebEngage.framework; path = xc10/WebEngage.framework; sourceTree = "<group>"; };
 		6EF3C4DB5CD9695B769A1FB23015AF7F /* OCMInvocationStub.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMInvocationStub.m; path = Source/OCMock/OCMInvocationStub.m; sourceTree = "<group>"; };
 		70589FD541916BDE1373F0CF9687EE33 /* OCMRealObjectForwarder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMRealObjectForwarder.h; path = Source/OCMock/OCMRealObjectForwarder.h; sourceTree = "<group>"; };
 		70E0CA923B625D96D6EC1F89C8CE4262 /* OCMock-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OCMock-dummy.m"; sourceTree = "<group>"; };
@@ -428,10 +426,10 @@
 		99874C785826463F9A80FDBBBAEB172C /* EXPMatchers+beInstanceOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beInstanceOf.h"; path = "Expecta/Matchers/EXPMatchers+beInstanceOf.h"; sourceTree = "<group>"; };
 		9AC321F6F280462E9862BD38C4225438 /* OCMObserverRecorder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMObserverRecorder.h; path = Source/OCMock/OCMObserverRecorder.h; sourceTree = "<group>"; };
 		9AEDF3760FC0852BC210BECA283FBD6E /* EXPMatchers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPMatchers.h; path = Expecta/Matchers/EXPMatchers.h; sourceTree = "<group>"; };
-		9AF9A57B9064771922ECCC2C688D1E7C /* libPods-Segment-WebEngage_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Segment-WebEngage_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AF9A57B9064771922ECCC2C688D1E7C /* libPods-Segment-WebEngage_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Segment-WebEngage_Example.a"; path = "libPods-Segment-WebEngage_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C1C66B89A1EF9CB7D0D2C720CD6D1B8 /* Analytics-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Analytics-dummy.m"; sourceTree = "<group>"; };
 		9CA048AD89BDDF339BADD57F214C09C0 /* EXPMatchers+beGreaterThanOrEqualTo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beGreaterThanOrEqualTo.m"; path = "Expecta/Matchers/EXPMatchers+beGreaterThanOrEqualTo.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E3D93B9C0A1D887A1CB90DEE9CBFF3C /* EXPMatchers+contain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+contain.m"; path = "Expecta/Matchers/EXPMatchers+contain.m"; sourceTree = "<group>"; };
 		A0922421B2C722BC929EEA0942D5F422 /* ExpectaObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ExpectaObject.m; path = Expecta/ExpectaObject.m; sourceTree = "<group>"; };
 		A32D88DC9AEE45F149CD57B0BD5EE9EE /* Segment-WebEngage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Segment-WebEngage.xcconfig"; sourceTree = "<group>"; };
@@ -470,9 +468,10 @@
 		CD39214BF6C5A0EDA3D1910EB26EBCE9 /* EXPMatchers+beKindOf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beKindOf.m"; path = "Expecta/Matchers/EXPMatchers+beKindOf.m"; sourceTree = "<group>"; };
 		CF56C5ECA98D1B7EB821D0B9BB265061 /* SEGSegmentIntegrationFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGSegmentIntegrationFactory.m; path = Analytics/Classes/Internal/SEGSegmentIntegrationFactory.m; sourceTree = "<group>"; };
 		D07F845B58F2F4A56F1FC7189C7153DA /* OCMInvocationExpectation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCMInvocationExpectation.m; path = Source/OCMock/OCMInvocationExpectation.m; sourceTree = "<group>"; };
-		D082D0EB3FDDFB485041D0E3C3F429D4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D082D0EB3FDDFB485041D0E3C3F429D4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		D2469CEA60D37EF5BE269E5B670A571D /* OCMIndirectReturnValueProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMIndirectReturnValueProvider.h; path = Source/OCMock/OCMIndirectReturnValueProvider.h; sourceTree = "<group>"; };
 		D2715B7CDA24FFD15D7B778F019F1C57 /* Pods-Segment-WebEngage_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Segment-WebEngage_Example.release.xcconfig"; sourceTree = "<group>"; };
+		D42928C45F93E2BF59E97E95DCE6C13D /* WebEngage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebEngage.framework; path = xc11/WebEngage.framework; sourceTree = "<group>"; };
 		D4479B79E36A0ECEA60B5ACA2E8044EA /* EXPMatcherHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXPMatcherHelpers.m; path = Expecta/Matchers/EXPMatcherHelpers.m; sourceTree = "<group>"; };
 		D5C49F460D4D83A2080FD9A3E6709A17 /* OCMReturnValueProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OCMReturnValueProvider.h; path = Source/OCMock/OCMReturnValueProvider.h; sourceTree = "<group>"; };
 		DA51BC4D939B006E0DDF2CB2570D07C6 /* NSObject+OCMAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+OCMAdditions.h"; path = "Source/OCMock/NSObject+OCMAdditions.h"; sourceTree = "<group>"; };
@@ -497,7 +496,7 @@
 		EAE1C05E979C7107895C81503D099D3C /* Segment-WebEngage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Segment-WebEngage-dummy.m"; sourceTree = "<group>"; };
 		EC56877A3F01491D95CF7026E9831EB1 /* EXPMatchers+beCloseTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beCloseTo.h"; path = "Expecta/Matchers/EXPMatchers+beCloseTo.h"; sourceTree = "<group>"; };
 		EEACA5B290AA63A16062468D4CF47636 /* EXPMatchers+beNil.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beNil.m"; path = "Expecta/Matchers/EXPMatchers+beNil.m"; sourceTree = "<group>"; };
-		F30C125DB91902F63DC73AEF0B0E6111 /* libOCMock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOCMock.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F30C125DB91902F63DC73AEF0B0E6111 /* libOCMock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libOCMock.a; path = libOCMock.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F325C93E779FBAE0F67CB50342108347 /* EXPMatchers+match.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+match.h"; path = "Expecta/Matchers/EXPMatchers+match.h"; sourceTree = "<group>"; };
 		F3A7D7707455ED6474F4493544E4DC34 /* SEGAnalyticsConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SEGAnalyticsConfiguration.m; path = Analytics/Classes/SEGAnalyticsConfiguration.m; sourceTree = "<group>"; };
 		F3C02C0D37463263DB53D78B77234702 /* OCClassMockObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OCClassMockObject.m; path = Source/OCMock/OCClassMockObject.m; sourceTree = "<group>"; };
@@ -574,6 +573,16 @@
 			path = "../Target Support Files/OCMock";
 			sourceTree = "<group>";
 		};
+		2D5B10DB1B6E207E089FFAC9CBABAA14 /* WebEngage */ = {
+			isa = PBXGroup;
+			children = (
+				6397058B8A896732F9C25F14CEF954B2 /* Support Files */,
+				E52DD82BBD26D28AA27B597D05171E02 /* Xcode11 */,
+			);
+			name = WebEngage;
+			path = WebEngage;
+			sourceTree = "<group>";
+		};
 		3347416E9CAB242201B1BE91813D7030 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
@@ -603,12 +612,13 @@
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		554DBADEB7596C49A1755CA37B8CEE55 /* Xcode10 */ = {
+		6397058B8A896732F9C25F14CEF954B2 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E1496F1F15DD7274B266356775896B97 /* Frameworks */,
+				2FB6CFF965DED2C69D30B372889A6E80 /* WebEngage.xcconfig */,
 			);
-			name = Xcode10;
+			name = "Support Files";
+			path = "../Target Support Files/WebEngage";
 			sourceTree = "<group>";
 		};
 		835B01E2854719D79ED29F4AB886D08F /* Targets Support Files */ = {
@@ -657,15 +667,6 @@
 			);
 			name = "Segment-WebEngage";
 			path = ../..;
-			sourceTree = "<group>";
-		};
-		9B9BB06E3EAFA1DC4F15882D1BA3661C /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				08D5FBADA23AEC25AD659B034C16D3CF /* WebEngage.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/WebEngage";
 			sourceTree = "<group>";
 		};
 		AF4744D956850F682F0596062DDC2F90 /* Products */ = {
@@ -759,7 +760,16 @@
 				0063E802D5AB719FCDCFC35C40ACFAF0 /* NSValue+Expecta.m */,
 				F67AB0B7FFD1BDC65E518947A684B1C1 /* Support Files */,
 			);
+			name = Expecta;
 			path = Expecta;
+			sourceTree = "<group>";
+		};
+		BB2C85342324041CD485AB4F4F64D255 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D42928C45F93E2BF59E97E95DCE6C13D /* WebEngage.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C4A27178965A61EE7F97CECE39D32CCD /* Analytics */ = {
@@ -818,6 +828,7 @@
 				DDA52ED2B549F5F854F2828F02817895 /* UIViewController+SEGScreen.m */,
 				395F793419C5701146CAE3562DEFE472 /* Support Files */,
 			);
+			name = Analytics;
 			path = Analytics;
 			sourceTree = "<group>";
 		};
@@ -839,7 +850,7 @@
 				C4A27178965A61EE7F97CECE39D32CCD /* Analytics */,
 				B17659A1204D08D4661973518364D362 /* Expecta */,
 				EF2D1D4DB0681A8B1527FA6200DDA7F1 /* OCMock */,
-				E2FDD03BFFF82309FBB6F899EF8F4429 /* WebEngage */,
+				2D5B10DB1B6E207E089FFAC9CBABAA14 /* WebEngage */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -864,21 +875,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E1496F1F15DD7274B266356775896B97 /* Frameworks */ = {
+		E52DD82BBD26D28AA27B597D05171E02 /* Xcode11 */ = {
 			isa = PBXGroup;
 			children = (
-				6EBA749D0C35656213D2837ADD3D2FFD /* WebEngage.framework */,
+				BB2C85342324041CD485AB4F4F64D255 /* Frameworks */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E2FDD03BFFF82309FBB6F899EF8F4429 /* WebEngage */ = {
-			isa = PBXGroup;
-			children = (
-				9B9BB06E3EAFA1DC4F15882D1BA3661C /* Support Files */,
-				554DBADEB7596C49A1755CA37B8CEE55 /* Xcode10 */,
-			);
-			path = WebEngage;
+			name = Xcode11;
 			sourceTree = "<group>";
 		};
 		EF2D1D4DB0681A8B1527FA6200DDA7F1 /* OCMock */ = {
@@ -954,6 +956,7 @@
 				B737B9A5B66CFE6DFBD26CE1E26EBA69 /* OCProtocolMockObject.m */,
 				1061B08C9F6B65E6993D563CAE65D25D /* Support Files */,
 			);
+			name = OCMock;
 			path = OCMock;
 			sourceTree = "<group>";
 		};
@@ -1459,11 +1462,11 @@
 /* Begin XCBuildConfiguration section */
 		48C85FB0A281AB04FE92238107859060 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08D5FBADA23AEC25AD659B034C16D3CF /* WebEngage.xcconfig */;
+			baseConfigurationReference = 2FB6CFF965DED2C69D30B372889A6E80 /* WebEngage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1501,7 +1504,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/Analytics/Analytics-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1525,7 +1528,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/Expecta/Expecta-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1548,7 +1551,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/Segment-WebEngage/Segment-WebEngage-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1571,7 +1574,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/Segment-WebEngage/Segment-WebEngage-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1639,7 +1642,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -1718,7 +1722,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/Expecta/Expecta-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1742,7 +1746,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/OCMock/OCMock-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1758,11 +1762,11 @@
 		};
 		B25718B04DF2465829B5D31304571143 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08D5FBADA23AEC25AD659B034C16D3CF /* WebEngage.xcconfig */;
+			baseConfigurationReference = 2FB6CFF965DED2C69D30B372889A6E80 /* WebEngage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1800,7 +1804,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/OCMock/OCMock-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1866,9 +1870,8 @@
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PREFIX_HEADER = "Target Support Files/Analytics/Analytics-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
