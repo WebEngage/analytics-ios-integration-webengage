@@ -349,8 +349,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Segment-WebEngage_Example/Pods-Segment-WebEngage_Example-frameworks.sh",
-				"${PODS_ROOT}/WebEngage/xc10/WebEngage.framework",
-				"${PODS_ROOT}/WebEngage/xc10/WebEngage.framework.dSYM",
+				"${PODS_ROOT}/WebEngage/xc11/WebEngage.framework",
+				"${PODS_ROOT}/WebEngage/xc11/WebEngage.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
