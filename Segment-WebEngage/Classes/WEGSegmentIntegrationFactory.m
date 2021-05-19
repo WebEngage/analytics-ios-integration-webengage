@@ -7,7 +7,12 @@
 //
 
 #import "WEGSegmentIntegrationFactory.h"
+
+#if defined(__has_include) && __has_include(<Analytics/SEGIntegration.h>)
 #import <Analytics/SEGAnalyticsUtils.h>
+#else
+#import <Segment/SEGAnalyticsUtils.h>
+#endif
 
 @interface WEGSegmentIntegrationFactory ()
 @property(nonatomic, strong, readwrite) UIApplication *application;
@@ -73,23 +78,41 @@
 
 - (id<SEGIntegration>)createWithSettings:(NSDictionary *)settings
                             forAnalytics:(SEGAnalytics *)analytics {
-  BOOL __block isInited = NO;
-  dispatch_sync(dispatch_get_main_queue(), ^{
-    isInited = [[WebEngage sharedInstance]
-                          application:self.application
-        didFinishLaunchingWithOptions:@{
-          @"WebEngage" : settings ? settings : @{},
-          @"launchOptions" : self.launchOptions ? self.launchOptions : @{}
-        }
-                 notificationDelegate:self.notificationDelegate
-                         autoRegister:self.autoAPNSRegister];
-  });
-  if (isInited) {
-    return [[WEGSegmentIntegration alloc] init];
-  } else {
-    SEGLog(@"Could Not Initialize WebEngage");
-    return nil;
-  }
+    BOOL __block isInited = NO;
+    /*
+     Adding main thread check as,
+     Segment calls this method on background queue on first launch,
+     From second launch onwards it calls this method on main queue.
+     */
+    
+    [self runOnMainQueueWithoutDeadlocking:^{
+        NSString *licenceCode = settings[@"licenseCode"];
+        isInited = [[WebEngage sharedInstance]
+                    application:self.application
+                    didFinishLaunchingWithOptions:@{
+                        @"WebEngage" : settings ? settings : @{},
+                        @"launchOptions" : self.launchOptions ? self.launchOptions : @{}
+                    }
+                    notificationDelegate:self.notificationDelegate
+                    autoRegister:self.autoAPNSRegister
+                    setLicenseCode:licenceCode];
+    }];
+    
+    if (isInited) {
+        return [[WEGSegmentIntegration alloc] init];
+    } else {
+        SEGLog(@"Could Not Initialize WebEngage");
+        return nil;
+    }
+}
+
+- (void)runOnMainQueueWithoutDeadlocking:(void (^)(void))block {
+    if ([NSThread isMainThread]) {
+        block();
+    }
+    else {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
 }
 
 - (NSString *)key {
