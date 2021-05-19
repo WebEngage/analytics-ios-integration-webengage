@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2005-2018 Erik Doernenburg and contributors
+ *  Copyright (c) 2005-2020 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-#import <OCMock/OCMockObject.h>
+#import "OCMockObject.h"
 
 @interface OCClassMockObject : OCMockObject 
 {
@@ -27,5 +27,7 @@
 
 - (Class)mockedClass;
 - (Class)mockObjectClass;  // since -class returns the mockedClass
+
+- (void)assertClassIsSupported:(Class)aClass;
 
 @end

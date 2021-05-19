@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2009-2018 Erik Doernenburg and contributors
+ *  Copyright (c) 2009-2020 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -19,10 +19,11 @@
 @class OCMLocation;
 
 
+__deprecated_msg("Please use XCTNSNotificationExpectation instead.")
 @interface OCObserverMockObject : NSObject 
 {
 	BOOL		    expectationOrderMatters;
-	NSMutableArray  *recorders;
+    NSMutableArray  *recorders;
     NSMutableArray  *centers;
 }
 

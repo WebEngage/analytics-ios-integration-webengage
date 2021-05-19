@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2006-2018 Erik Doernenburg and contributors
+ *  Copyright (c) 2006-2020 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -15,12 +15,10 @@
  */
 
 #import <objc/runtime.h>
-#import <Availability.h>
-#import <TargetConditionals.h>
 #import "NSInvocation+OCMAdditions.h"
+#import "OCMArg.h"
 #import "OCMFunctionsPrivate.h"
 #import "NSMethodSignature+OCMAdditions.h"
-
 
 #if (TARGET_OS_OSX && (!defined(__MAC_10_10) || __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_10)) || \
     (TARGET_OS_IPHONE && (!defined(__IPHONE_8_0) || __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0))
@@ -29,6 +27,8 @@ static BOOL OCMObjectIsClass(id object) {
 }
 #define object_isClass OCMObjectIsClass
 #endif
+
+static NSString *const OCMArgAnyPointerDescription = @"<[OCMArg anyPointer]>";
 
 
 @implementation NSInvocation(OCMAdditions)
@@ -86,37 +86,33 @@ static NSString *const OCMRetainedObjectArgumentsKey = @"OCMRetainedObjectArgume
             [self getArgument:&argument atIndex:index];
             if((argument != nil) && (argument != objectToExclude))
             {
-                if(OCMIsBlockType(argumentType))
+                if(OCMIsBlockType(argumentType) && OCMIsBlock(argument))
                 {
-                    // block types need to be copied in case they're stack blocks
-                    id blockArgument = [argument copy];
-                    [retainedArguments addObject:blockArgument];
-                    [blockArgument release];
+                	// The argument's type is block and the passed argument is a block. In this
+                	// case we can't retain the argument because it might be stack block, which
+                	// must be copied. Further, non-escaping blocks have a lifetime that is stack-
+                	// based and they treat copy/release as a no-op. Keeping a reference to these
+                	// would result in a dangling pointer, which is why they are ignored here.
+                	// Note: even when the argument's type is block the argument could be
+                	// something else, e.g. an instance of OCMConstraint. Such cases are handled
+                	// like regular objects in the last else branch below.
+				  	if(OCMIsNonEscapingBlock(argument) == NO)
+				  	{
+				  		id blockArgument = [argument copy];
+					  	[retainedArguments addObject:blockArgument];
+					  	[blockArgument release];
+				  	}
+                }
+                else if(OCMIsClassType(argumentType) && object_isClass(argument))
+                {
+                    // The argument's type is class and the passed argument is a class. In this
+                    // case do not retain the argument. Note: Even though the type is class the
+                    // argument could be a non-class, e.g. an instance of OCMArg.
                 }
                 else
                 {
-                    [retainedArguments addObject:argument];
+                	[retainedArguments addObject:argument];
                 }
-            }
-        }
-    }
-
-    const char *returnType = [[self methodSignature] methodReturnType];
-    if(OCMIsObjectType(returnType))
-    {
-        id returnValue;
-        [self getReturnValue:&returnValue];
-        if((returnValue != nil) && (returnValue != objectToExclude))
-        {
-            if(OCMIsBlockType(returnType))
-            {
-                id blockReturnValue = [returnValue copy];
-                [retainedArguments addObject:blockReturnValue];
-                [blockReturnValue release];
-            }
-            else
-            {
-                [retainedArguments addObject:returnValue];
             }
         }
     }
@@ -313,6 +309,7 @@ static NSString *const OCMRetainedObjectArgumentsKey = @"OCMRetainedObjectArgume
 	return nil;
 }
 
+
 - (NSString *)invocationDescription
 {
 	NSMethodSignature *methodSignature = [self methodSignature];
@@ -362,7 +359,6 @@ static NSString *const OCMRetainedObjectArgumentsKey = @"OCMRetainedObjectArgume
 	}
 	
 }
-
 
 - (NSString *)objectDescriptionAtIndex:(NSInteger)anInt
 {
@@ -506,18 +502,30 @@ static NSString *const OCMRetainedObjectArgumentsKey = @"OCMRetainedObjectArgume
 	void *buffer;
 	
 	[self getArgument:&buffer atIndex:anInt];
-	return [NSString stringWithFormat:@"%p", buffer];
+	
+    if(buffer == [OCMArg anyPointer])
+		return OCMArgAnyPointerDescription;
+    else
+        return [NSString stringWithFormat:@"%p", buffer];
 }
 
 - (NSString *)cStringDescriptionAtIndex:(NSInteger)anInt
 {
-	char buffer[104];
 	char *cStringPtr;
 	
 	[self getArgument:&cStringPtr atIndex:anInt];
-	strlcpy(buffer, cStringPtr, sizeof(buffer));
-	strlcpy(buffer + 100, "...", (sizeof(buffer) - 100));
-	return [NSString stringWithFormat:@"\"%s\"", buffer];
+    
+	if(cStringPtr == [OCMArg anyPointer])
+	{
+		return OCMArgAnyPointerDescription;
+	}
+	else
+	{
+		char buffer[104];
+		strlcpy(buffer, cStringPtr, sizeof(buffer));
+		strlcpy(buffer + 100, "...", (sizeof(buffer) - 100));
+		return [NSString stringWithFormat:@"\"%s\"", buffer];
+	}
 }
 
 - (NSString *)selectorDescriptionAtIndex:(NSInteger)anInt
@@ -526,6 +534,48 @@ static NSString *const OCMRetainedObjectArgumentsKey = @"OCMRetainedObjectArgume
 	
 	[self getArgument:&selectorValue atIndex:anInt];
 	return [NSString stringWithFormat:@"@selector(%@)", NSStringFromSelector(selectorValue)];
+}
+
+
+- (BOOL)isMethodFamily:(NSString *)family
+{
+	// Definitions here: https://clang.llvm.org/docs/AutomaticReferenceCounting.html#method-families
+
+	NSMethodSignature *signature = [self methodSignature];
+	if(OCMIsObjectType(signature.methodReturnType) == NO)
+	{
+		return NO;
+	}
+
+	NSString *selString = NSStringFromSelector([self selector]);
+	NSRange underscoreRange = [selString rangeOfString:@"^_*" options:NSRegularExpressionSearch];
+	selString = [selString substringFromIndex:NSMaxRange(underscoreRange)];
+
+	if([selString hasPrefix:family] == NO)
+	{
+		return NO;
+	}
+	NSUInteger familyLength = [family length];
+	if(([selString length] > familyLength) &&
+			([[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:[selString characterAtIndex:familyLength]]))
+	{
+		return NO;
+	}
+	return YES;
+}
+
+
+- (BOOL)methodIsInInitFamily
+{
+	return [self isMethodFamily:@"init"];
+}
+
+- (BOOL)methodIsInCreateFamily
+{
+	return [self isMethodFamily:@"alloc"]
+            || [self isMethodFamily:@"copy"]
+            || [self isMethodFamily:@"mutableCopy"]
+            || [self isMethodFamily:@"new"];
 }
 
 @end

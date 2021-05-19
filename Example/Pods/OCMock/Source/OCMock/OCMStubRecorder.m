@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2004-2018 Erik Doernenburg and contributors
+ *  Copyright (c) 2004-2020 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -16,16 +16,17 @@
 
 #import "OCMStubRecorder.h"
 #import "OCClassMockObject.h"
-#import "OCMReturnValueProvider.h"
+#import "OCMInvocationStub.h"
+#import "OCMBlockCaller.h"
 #import "OCMBoxedReturnValueProvider.h"
 #import "OCMExceptionReturnValueProvider.h"
 #import "OCMIndirectReturnValueProvider.h"
 #import "OCMNotificationPoster.h"
-#import "OCMBlockCaller.h"
 #import "OCMRealObjectForwarder.h"
-#import "OCMFunctions.h"
-#import "OCMInvocationStub.h"
 
+#if !TARGET_OS_WATCH
+#import <XCTest/XCTest.h>
+#endif
 
 @implementation OCMStubRecorder
 
@@ -51,20 +52,29 @@
 
 - (id)andReturn:(id)anObject
 {
-	[[self stub] addInvocationAction:[[[OCMReturnValueProvider alloc] initWithValue:anObject] autorelease]];
-	return self;
+    id action;
+    if(anObject == mockObject)
+    {
+        action = [[[OCMNonRetainingObjectReturnValueProvider alloc] initWithValue:anObject] autorelease];
+    }
+    else
+    {
+        action = [[[OCMObjectReturnValueProvider alloc] initWithValue:anObject] autorelease];
+    }
+    [[self stub] addInvocationAction:action];
+    return self;
 }
 
 - (id)andReturnValue:(NSValue *)aValue
 {
     [[self stub] addInvocationAction:[[[OCMBoxedReturnValueProvider alloc] initWithValue:aValue] autorelease]];
-	return self;
+    return self;
 }
 
 - (id)andThrow:(NSException *)anException
 {
     [[self stub] addInvocationAction:[[[OCMExceptionReturnValueProvider alloc] initWithValue:anException] autorelease]];
-	return self;
+    return self;
 }
 
 - (id)andPost:(NSNotification *)aNotification
@@ -82,7 +92,7 @@
 - (id)andDo:(void (^)(NSInvocation *))aBlock 
 {
     [[self stub] addInvocationAction:[[[OCMBlockCaller alloc] initWithCallBlock:aBlock] autorelease]];
-	return self;
+    return self;
 }
 
 - (id)andForwardToRealObject
@@ -91,6 +101,15 @@
     return self;
 }
 
+#if !TARGET_OS_WATCH
+- (id)andFulfill:(XCTestExpectation *)expectation
+{
+    return [self andDo:^(NSInvocation *invocation)
+    {
+        [expectation fulfill];
+    }];
+}
+#endif
 
 #pragma mark Finishing recording
 
@@ -114,8 +133,8 @@
     {
         if(OCMIsObjectType([aValue objCType]))
         {
-            NSValue *objValue = nil;
-            [aValue getValue:&objValue];
+            id objValue = nil;
+            [aValue getValue:&objValue]; // TODO: deprecated but replacement available in 10.13 only
             return [self andReturn:objValue];
         }
         else
@@ -123,7 +142,7 @@
             return [self andReturnValue:aValue];
         }
     };
-    return [[theBlock copy] autorelease];
+    return (id)[[theBlock copy] autorelease];
 }
 
 
@@ -135,7 +154,7 @@
     {
         return [self andThrow:anException];
     };
-    return [[theBlock copy] autorelease];
+    return (id)[[theBlock copy] autorelease];
 }
 
 
@@ -147,7 +166,7 @@
     {
         return [self andPost:aNotification];
     };
-    return [[theBlock copy] autorelease];
+    return (id)[[theBlock copy] autorelease];
 }
 
 
@@ -159,7 +178,7 @@
     {
         return [self andCall:aSelector onObject:anObject];
     };
-    return [[theBlock copy] autorelease];
+    return (id)[[theBlock copy] autorelease];
 }
 
 
@@ -171,7 +190,7 @@
     {
         return [self andDo:blockToCall];
     };
-    return [[theBlock copy] autorelease];
+    return (id)[[theBlock copy] autorelease];
 }
 
 
@@ -183,8 +202,21 @@
     {
         return [self andForwardToRealObject];
     };
-    return [[theBlock copy] autorelease];
+    return (id)[[theBlock copy] autorelease];
 }
 
+#if !TARGET_OS_WATCH
+
+@dynamic _andFulfill;
+
+- (OCMStubRecorder * (^)(XCTestExpectation *))_andFulfill
+{
+    id (^theBlock)(XCTestExpectation *) = ^ (XCTestExpectation *expectation)
+    {
+        return [self andFulfill:expectation];
+    };
+    return (id)[[theBlock copy] autorelease];
+}
+#endif
 
 @end
