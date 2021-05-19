@@ -63,7 +63,7 @@
 		6BBEFB9CC0AF20233F3188DE /* Pods-Segment-WebEngage_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-WebEngage_Example.debug.xcconfig"; path = "Target Support Files/Pods-Segment-WebEngage_Example/Pods-Segment-WebEngage_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BC338B73E96ABB767E9DDACC /* Segment-WebEngage.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "Segment-WebEngage.podspec"; path = "../Segment-WebEngage.podspec"; sourceTree = "<group>"; };
+		BC338B73E96ABB767E9DDACC /* Segment-WebEngage.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "Segment-WebEngage.podspec"; path = "../Segment-WebEngage.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D7E167CA0F09D44D2D3F242B /* Pods-Segment-WebEngage_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-WebEngage_Tests.release.xcconfig"; path = "Target Support Files/Pods-Segment-WebEngage_Tests/Pods-Segment-WebEngage_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		EB48B4107D61D4F66580EBD2 /* Pods-Segment-WebEngage_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Segment-WebEngage_Example.release.xcconfig"; path = "Target Support Files/Pods-Segment-WebEngage_Example/Pods-Segment-WebEngage_Example.release.xcconfig"; sourceTree = "<group>"; };
 		F86997AFED1D80B89C8997F4 /* libPods-Segment-WebEngage_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Segment-WebEngage_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,7 +103,6 @@
 				0220A8BF4A59B20873D63859 /* Pods-Segment-WebEngage_Tests.debug.xcconfig */,
 				D7E167CA0F09D44D2D3F242B /* Pods-Segment-WebEngage_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
