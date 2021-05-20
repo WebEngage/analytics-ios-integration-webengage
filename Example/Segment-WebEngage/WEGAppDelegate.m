@@ -13,7 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:@"D56SbZAWtEIDvBbxuHchMGEx5WkvzP2U"];
+    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:@"ZC2XY5cuS0pEmjYHAvJHs91NyymJR1hL"];
     
     //Additional Segment Configuration
     configuration.trackApplicationLifecycleEvents = NO; // Enable this to record certain application events automatically!

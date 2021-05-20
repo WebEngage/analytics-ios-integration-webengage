@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2009-2018 Erik Doernenburg and contributors
+ *  Copyright (c) 2009-2020 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -15,12 +15,15 @@
  */
 
 #import "OCObserverMockObject.h"
-#import "OCMObserverRecorder.h"
 #import "OCMLocation.h"
+#import "OCMMacroState.h"
+#import "OCMObserverRecorder.h"
 #import "OCMFunctionsPrivate.h"
 
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation OCObserverMockObject
+#pragma clang diagnostic pop
 
 #pragma mark  Initialisers, description, accessors, etc.
 
@@ -51,7 +54,7 @@
 
 - (NSString *)description
 {
-	return @"OCMockObserver";
+	return @"OCObserverMockObject";
 }
 
 - (void)setExpectationOrderMatters:(BOOL)flag
@@ -107,14 +110,30 @@
 
 #pragma mark  Receiving recording requests via macro
 
+// This is a bit of a hack. The methods simply assume that when they are called from within a macro that it's
+// the OCMExpect macro. That creates a recorder for mock objects, which we cannot use here. So, we overwrite
+// it with a newly allocated recorder.
+
 - (NSNotification *)notificationWithName:(NSString *)name object:(id)sender
 {
-    return [[self expect] notificationWithName:name object:sender];
+    if([OCMMacroState globalState] != nil)
+    {
+        id recorder = [self expect];
+        [[OCMMacroState globalState] setRecorder:recorder];
+        return [recorder notificationWithName:name object:sender];
+    }
+    return nil;
 }
 
 - (NSNotification *)notificationWithName:(NSString *)name object:(id)sender userInfo:(NSDictionary *)userInfo
 {
-    return [[self expect] notificationWithName:name object:sender userInfo:userInfo];
+    if([OCMMacroState globalState] != nil)
+    {
+        id recorder = [self expect];
+        [[OCMMacroState globalState] setRecorder:recorder];
+        return [recorder notificationWithName:name object:sender userInfo:userInfo];
+    }
+    return nil;
 }
 
 

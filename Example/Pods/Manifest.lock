@@ -1,15 +1,13 @@
 PODS:
-  - Analytics (3.7.0)
+  - Analytics (4.1.4)
   - Expecta (1.0.6)
-  - OCMock (3.4.3)
-  - Segment-WebEngage (1.1.0):
-    - Segment-WebEngage/Xcode10 (= 1.1.0)
-  - Segment-WebEngage/Xcode10 (1.1.0):
+  - OCMock (3.8.1)
+  - Segment-WebEngage (1.2.0):
     - Analytics
-    - WebEngage
-  - WebEngage (4.9.9):
-    - WebEngage/Xcode11 (= 4.9.9)
-  - WebEngage/Xcode11 (4.9.9)
+    - WebEngage (~> 5.2.4)
+  - WebEngage (5.2.6):
+    - WebEngage/Xcode11 (= 5.2.6)
+  - WebEngage/Xcode11 (5.2.6)
 
 DEPENDENCIES:
   - Expecta
@@ -28,12 +26,12 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Analytics: 77fd5fb102a4a5eedafa2c2b0245ceb7b7c15e45
+  Analytics: 7bdc735c456434b4eaa2eacdcf122bb03d51ede7
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
-  OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
-  Segment-WebEngage: 5a8798074252b18d9ef58bc2f47df44df9f10602
-  WebEngage: d4504dc03965cc6408333f19b45b5456df4b5f8a
+  OCMock: 29f6e52085b4e7d9b075cbf03ed7c3112f82f934
+  Segment-WebEngage: 7ef65b70bb1d127743febeea6dbed5e1de3ab9ae
+  WebEngage: 9532b0a5892ba1e57703315372316613b1fb2203
 
-PODFILE CHECKSUM: aa78ae08568ddbeeefeb3039f44a8115ee685904
+PODFILE CHECKSUM: 686abb9dcac91124ca1677359d9b78e27e2caef1
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.10.0

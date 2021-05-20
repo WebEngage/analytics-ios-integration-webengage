@@ -1,7 +1,7 @@
 
 # Avoid use_frameworks! declaration in your Podfile
 
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 target 'Segment-WebEngage_Example' do
 

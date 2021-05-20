@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = 'Segment-WebEngage'
-  spec.version      = '1.1.0'
+  spec.version      = '1.2.0'
 
   spec.summary      = 'WebEngage Integration for Segment\'s analytics-ios library'
   spec.description  = <<-DESC
@@ -14,22 +14,13 @@ Pod::Spec.new do |spec|
   spec.homepage          = 'https://webengage.com'
   spec.social_media_url  = 'http://twitter.com/webengage'
   spec.documentation_url = 'https://docs.webengage.com/docs/segment-advanced-integration#section-ios'
-  spec.author            = 'Saumitra Bhave', 'Yogesh Singh'
+  spec.author            = { "WebEngage" => "https://webengage.com" }
   spec.source            = { :git => 'https://github.com/WebEngage/analytics-ios-integration-webengage.git', :tag => spec.version.to_s }
   spec.source_files      = 'Segment-WebEngage/Classes/**/*'
   spec.platform          = :ios
-  spec.ios.deployment_target = '8.0'
+  spec.ios.deployment_target = '10.0'
 
-  spec.subspec 'Xcode10' do |xc10|
-    xc10.dependency 'WebEngage'
-    xc10.dependency 'Analytics'
-  end
-
-  spec.subspec 'Xcode9' do |xc9|
-    xc9.dependency 'WebEngage/Xcode9'
-    xc9.dependency 'Analytics'
-  end
-
-  spec.default_subspec = 'Xcode10'
+  spec.dependency 'WebEngage', '~> 5.2.4'
+  spec.dependency 'Analytics'
 
 end

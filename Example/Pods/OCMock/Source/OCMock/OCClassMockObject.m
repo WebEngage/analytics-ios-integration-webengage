@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2005-2018 Erik Doernenburg and contributors
+ *  Copyright (c) 2005-2020 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -16,10 +16,15 @@
 
 #import <objc/runtime.h>
 #import "OCClassMockObject.h"
-#import "NSObject+OCMAdditions.h"
-#import "OCMFunctionsPrivate.h"
 #import "OCMInvocationStub.h"
+#import "OCMFunctionsPrivate.h"
 #import "NSMethodSignature+OCMAdditions.h"
+#import "NSObject+OCMAdditions.h"
+
+@interface NSObject(OCMClassMockingSupport)
++ (BOOL)supportsMocking:(NSString **)reason;
+@end
+
 
 @implementation OCClassMockObject
 
@@ -27,7 +32,7 @@
 
 - (id)initWithClass:(Class)aClass
 {
-    NSParameterAssert(aClass != nil);
+	[self assertClassIsSupported:aClass];
 	[super init];
 	mockedClass = aClass;
     [self prepareClassForClassMethodMocking];
@@ -42,12 +47,25 @@
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"OCMockObject(%@)", NSStringFromClass(mockedClass)];
+	return [NSString stringWithFormat:@"OCClassMockObject(%@)", NSStringFromClass(mockedClass)];
 }
 
 - (Class)mockedClass
 {
 	return mockedClass;
+}
+
+- (void)assertClassIsSupported:(Class)aClass
+{
+    if(aClass == Nil)
+        [NSException raise:NSInvalidArgumentException format:@"Class cannot be Nil."];
+
+    if([aClass respondsToSelector:@selector(supportsMocking:)])
+    {
+        NSString *reason = nil;
+        if(![aClass supportsMocking:&reason])
+            [NSException raise:NSInvalidArgumentException format:@"Class %@ does not support mocking: %@", aClass, reason];
+    }
 }
 
 #pragma mark  Extending/overriding superclass behaviour
@@ -60,7 +78,7 @@
     }
     if(classCreatedForNewMetaClass != nil)
     {
-        objc_disposeClassPair(classCreatedForNewMetaClass);
+        OCMDisposeSubclass(classCreatedForNewMetaClass);
         classCreatedForNewMetaClass = nil;
     }
     [super stopMocking];
@@ -123,16 +141,13 @@
 
     /* adding forwarder for most class methods (instance methods on meta class) to allow for verify after run */
     NSArray *methodBlackList = @[@"class", @"forwardingTargetForSelector:", @"methodSignatureForSelector:", @"forwardInvocation:", @"isBlock",
-            @"instanceMethodForwarderForSelector:", @"instanceMethodSignatureForSelector:"];
+            @"instanceMethodForwarderForSelector:", @"instanceMethodSignatureForSelector:", @"resolveClassMethod:"];
     [NSObject enumerateMethodsInClass:originalMetaClass usingBlock:^(Class cls, SEL sel) {
         if((cls == object_getClass([NSObject class])) || (cls == [NSObject class]) || (cls == object_getClass(cls)))
             return;
-        NSString *className = NSStringFromClass(cls);
-        NSString *selName = NSStringFromSelector(sel);
-        if(([className hasPrefix:@"NS"] || [className hasPrefix:@"UI"]) &&
-           ([selName hasPrefix:@"_"] || [selName hasSuffix:@"_"]))
+        if(OCMIsApplePrivateMethod(cls, sel))
             return;
-        if([methodBlackList containsObject:selName])
+        if([methodBlackList containsObject:NSStringFromSelector(sel)])
             return;
         @try
         {
