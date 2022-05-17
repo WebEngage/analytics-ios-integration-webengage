@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = 'Segment-WebEngage'
-  spec.version      = '1.2.0'
+  spec.version      = '1.2.1'
 
   spec.summary      = 'WebEngage Integration for Segment\'s analytics-ios library'
   spec.description  = <<-DESC
