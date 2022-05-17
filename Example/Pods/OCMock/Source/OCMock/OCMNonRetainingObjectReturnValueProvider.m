@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2019-2020 Erik Doernenburg and contributors
+ *  Copyright (c) 2019-2021 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -14,16 +14,16 @@
  *  under the License.
  */
 
+#import "NSInvocation+OCMAdditions.h"
 #import "OCMNonRetainingObjectReturnValueProvider.h"
 #import "OCMFunctions.h"
-#import "NSInvocation+OCMAdditions.h"
 
 
 @implementation OCMNonRetainingObjectReturnValueProvider
 
 - (instancetype)initWithValue:(id)aValue
 {
-    if ((self = [super init]))
+    if((self = [super init]))
         returnValue = aValue;
     return self;
 }
@@ -37,4 +37,3 @@
     [anInvocation setReturnValue:&returnValue];
 }
 @end
-

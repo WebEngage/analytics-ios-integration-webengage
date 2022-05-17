@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014-2020 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2021 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -15,10 +15,10 @@
  */
 
 #import "OCMVerifier.h"
-#import "OCMockObject.h"
 #import "OCMInvocationMatcher.h"
 #import "OCMLocation.h"
 #import "OCMQuantifier.h"
+#import "OCMockObject.h"
 
 
 @implementation OCMVerifier
@@ -27,11 +27,11 @@
 {
     if(invocationMatcher != nil)
         [NSException raise:NSInternalInconsistencyException format:@"** Method init invoked twice on verifier. Are you trying to verify the init method? This is currently not supported."];
-    if ((self = [super init]))
+    if((self = [super init]))
     {
         invocationMatcher = [[OCMInvocationMatcher alloc] init];
     }
-    
+
     return self;
 }
 
@@ -49,9 +49,9 @@
 
 - (void)dealloc
 {
-	[_location release];
+    [_location release];
     [_quantifier release];
-	[super dealloc];
+    [super dealloc];
 }
 
 @end

@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2014-2020 Erik Doernenburg and contributors
+ *  Copyright (c) 2014-2021 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -52,7 +52,6 @@ BOOL OCMIsBlock(id potentialBlock);
 BOOL OCMIsNonEscapingBlock(id block);
 
 
-
 struct OCMBlockDef
 {
     void *isa; // initialized to &_NSConcreteStackBlock or &_NSConcreteGlobalBlock
@@ -76,4 +75,3 @@ enum
     OCMBlockDescriptionFlagsHasCopyDispose = (1 << 25),
     OCMBlockDescriptionFlagsHasSignature   = (1 << 30)
 };
-
