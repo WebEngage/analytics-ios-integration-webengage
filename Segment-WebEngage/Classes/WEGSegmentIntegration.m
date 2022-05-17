@@ -53,29 +53,29 @@
   if (!firstName && !lastName) {
 
     NSString *name = [self getStringValue:traits[WEG_SEGMENT_NAME_KEY]];
-    if (!name) {
-      return;
-    }
-    NSArray *nameComponents = [name componentsSeparatedByString:@" "];
-    if (nameComponents && nameComponents.count > 0) {
-      firstName = nameComponents[0];
-      [traitsCopy removeObjectForKey:WEG_SEGMENT_NAME_KEY];
-    }
+    if (name) {
+        NSArray *nameComponents = [name componentsSeparatedByString:@" "];
+        if (nameComponents && nameComponents.count > 0) {
+          firstName = nameComponents[0];
+          [traitsCopy removeObjectForKey:WEG_SEGMENT_NAME_KEY];
+        }
 
-    if (nameComponents && nameComponents.count > 1) {
-      lastName = nameComponents[nameComponents.count - 1];
-    }
+        if (nameComponents && nameComponents.count > 1) {
+          lastName = nameComponents[nameComponents.count - 1];
+        }
 
-    if (firstName && firstName.length > 0) {
-      SEGLog(@"[[WebEngage sharedInstance].user setFirstName:%@]", firstName);
-      [user setFirstName:firstName];
-    }
+        if (firstName && firstName.length > 0) {
+          SEGLog(@"[[WebEngage sharedInstance].user setFirstName:%@]", firstName);
+          [user setFirstName:firstName];
+        }
 
-    if (lastName && lastName.length > 0) {
-      SEGLog(@"[[WebEngage sharedInstance].user setLastName:%@]", firstName);
-      [user setLastName:lastName];
+        if (lastName && lastName.length > 0) {
+          SEGLog(@"[[WebEngage sharedInstance].user setLastName:%@]", firstName);
+          [user setLastName:lastName];
+        }
     }
   }
+    
   NSString *email = [self getStringValue:traits[WEG_SEGMENT_EMAIL_KEY]];
   if (email) {
     SEGLog(@"[[WebEngage sharedInstance].user setEmail:%@]", email);
