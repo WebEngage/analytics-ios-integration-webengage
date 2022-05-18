@@ -2,8 +2,7 @@
 //  WEGSegmentIntegrationFactory.h
 //  WebEngage
 //
-//  Created by Arpit on 25/10/16.
-//  Copyright © 2016 Saumitra R. Bhave. All rights reserved.
+//  Copyright (c) 2022 Webklipper Technologies Pvt Ltd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

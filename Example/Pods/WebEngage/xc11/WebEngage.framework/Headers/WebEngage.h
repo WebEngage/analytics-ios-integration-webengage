@@ -71,12 +71,26 @@ typedef NS_ENUM(NSInteger, WEGLocationAccuracy){
 @property (nonatomic, weak, readwrite) id<WEGAppDelegate> pushNotificationDelegate;
 
 /**
+ *  Set this property to set custom timeout for a session. If the time spent by the app in background session is less it's value, the SDK will not a new visitor session
+ *
+ * @warning Application must initialize the SDK first by calling application:didFinishLaunchingWithOptions: or one of its overloads before accessing this property.
+*/
+@property (nonatomic, readwrite) long sessionTimeOut;
+
+/**
 *  Get an instance of WEGDeeplinkManager which provides APIs for handling and tracking universal links
 *
 *  @warning Application must initialize the SDK first by calling application:didFinishLaunchingWithOptions: or one
 *  of its overloads before accessing this property.
 */
 @property (nonatomic, readonly) WEGDeeplinkManager *deeplinkManager;
+
+/**
+ *  This value indicates that the SDK has been successfully initialised.
+ *
+ *  @warning Application must initialize the SDK first by calling application:didFinishLaunchingWithOptions: or one of its overloads before accessing this property.
+ */
+@property (nonatomic, readonly) BOOL isEngaged;
 
 /**
  *  Provides access to a Single Managed Instance of WebEngage.

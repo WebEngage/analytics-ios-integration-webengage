@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2009-2020 Erik Doernenburg and contributors
+ *  Copyright (c) 2009-2021 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -15,8 +15,8 @@
  */
 
 #import "OCMBoxedReturnValueProvider.h"
-#import "OCMFunctionsPrivate.h"
 #import "NSValue+OCMAdditions.h"
+#import "OCMFunctionsPrivate.h"
 
 
 @implementation OCMBoxedReturnValueProvider
@@ -59,6 +59,5 @@
 
     return OCMEqualTypesAllowingOpaqueStructs(returnType, valueType);
 }
-
 
 @end

@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2004-2020 Erik Doernenburg and contributors
+ *  Copyright (c) 2004-2021 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -16,27 +16,27 @@
 
 #import "OCMStubRecorder.h"
 #import "OCClassMockObject.h"
-#import "OCMInvocationStub.h"
 #import "OCMBlockCaller.h"
 #import "OCMBoxedReturnValueProvider.h"
 #import "OCMExceptionReturnValueProvider.h"
 #import "OCMIndirectReturnValueProvider.h"
+#import "OCMInvocationStub.h"
 #import "OCMNotificationPoster.h"
 #import "OCMRealObjectForwarder.h"
 
-#if !TARGET_OS_WATCH
+#if !defined(OCM_DISABLE_XCTEST_FEATURES)
 #import <XCTest/XCTest.h>
 #endif
 
 @implementation OCMStubRecorder
 
-#pragma mark  Initialisers, description, accessors, etc.
+#pragma mark Initialisers, description, accessors, etc.
 
 - (id)init
 {
     if(invocationMatcher != nil)
         [NSException raise:NSInternalInconsistencyException format:@"** Method init invoked twice on stub recorder. Are you trying to mock the init method? This is currently not supported."];
-    
+
     self = [super init];
     invocationMatcher = [[OCMInvocationStub alloc] init];
     return self;
@@ -48,7 +48,7 @@
 }
 
 
-#pragma mark  Recording invocation actions
+#pragma mark Recording invocation actions
 
 - (id)andReturn:(id)anObject
 {
@@ -80,16 +80,16 @@
 - (id)andPost:(NSNotification *)aNotification
 {
     [[self stub] addInvocationAction:[[[OCMNotificationPoster alloc] initWithNotification:aNotification] autorelease]];
-	return self;
+    return self;
 }
 
 - (id)andCall:(SEL)selector onObject:(id)anObject
 {
     [[self stub] addInvocationAction:[[[OCMIndirectReturnValueProvider alloc] initWithProvider:anObject andSelector:selector] autorelease]];
-	return self;
+    return self;
 }
 
-- (id)andDo:(void (^)(NSInvocation *))aBlock 
+- (id)andDo:(void (^)(NSInvocation *))aBlock
 {
     [[self stub] addInvocationAction:[[[OCMBlockCaller alloc] initWithCallBlock:aBlock] autorelease]];
     return self;
@@ -101,11 +101,10 @@
     return self;
 }
 
-#if !TARGET_OS_WATCH
+#if !defined(OCM_DISABLE_XCTEST_FEATURES)
 - (id)andFulfill:(XCTestExpectation *)expectation
 {
-    return [self andDo:^(NSInvocation *invocation)
-    {
+    return [self andDo:^(NSInvocation *invocation) {
         [expectation fulfill];
     }];
 }
@@ -127,10 +126,9 @@
 
 @dynamic _andReturn;
 
-- (OCMStubRecorder *(^)(NSValue *))_andReturn
+- (OCMStubRecorder * (^)(NSValue *))_andReturn
 {
-    id (^theBlock)(id) = ^ (NSValue *aValue)
-    {
+    id (^theBlock)(id) = ^(NSValue *aValue) {
         if(OCMIsObjectType([aValue objCType]))
         {
             id objValue = nil;
@@ -148,10 +146,9 @@
 
 @dynamic _andThrow;
 
-- (OCMStubRecorder *(^)(NSException *))_andThrow
+- (OCMStubRecorder * (^)(NSException *))_andThrow
 {
-    id (^theBlock)(id) = ^ (NSException * anException)
-    {
+    id (^theBlock)(id) = ^(NSException *anException) {
         return [self andThrow:anException];
     };
     return (id)[[theBlock copy] autorelease];
@@ -160,10 +157,9 @@
 
 @dynamic _andPost;
 
-- (OCMStubRecorder *(^)(NSNotification *))_andPost
+- (OCMStubRecorder * (^)(NSNotification *))_andPost
 {
-    id (^theBlock)(id) = ^ (NSNotification * aNotification)
-    {
+    id (^theBlock)(id) = ^(NSNotification *aNotification) {
         return [self andPost:aNotification];
     };
     return (id)[[theBlock copy] autorelease];
@@ -172,10 +168,9 @@
 
 @dynamic _andCall;
 
-- (OCMStubRecorder *(^)(id, SEL))_andCall
+- (OCMStubRecorder * (^)(id, SEL))_andCall
 {
-    id (^theBlock)(id, SEL) = ^ (id anObject, SEL aSelector)
-    {
+    id (^theBlock)(id, SEL) = ^(id anObject, SEL aSelector) {
         return [self andCall:aSelector onObject:anObject];
     };
     return (id)[[theBlock copy] autorelease];
@@ -184,10 +179,9 @@
 
 @dynamic _andDo;
 
-- (OCMStubRecorder *(^)(void (^)(NSInvocation *)))_andDo
+- (OCMStubRecorder * (^)(void (^)(NSInvocation *)))_andDo
 {
-    id (^theBlock)(void (^)(NSInvocation *)) = ^ (void (^ blockToCall)(NSInvocation *))
-    {
+    id (^theBlock)(void (^)(NSInvocation *)) = ^(void (^blockToCall)(NSInvocation *)) {
         return [self andDo:blockToCall];
     };
     return (id)[[theBlock copy] autorelease];
@@ -196,23 +190,21 @@
 
 @dynamic _andForwardToRealObject;
 
-- (OCMStubRecorder *(^)(void))_andForwardToRealObject
+- (OCMStubRecorder * (^)(void))_andForwardToRealObject
 {
-    id (^theBlock)(void) = ^ (void)
-    {
+    id (^theBlock)(void) = ^(void) {
         return [self andForwardToRealObject];
     };
     return (id)[[theBlock copy] autorelease];
 }
 
-#if !TARGET_OS_WATCH
+#if !defined(OCM_DISABLE_XCTEST_FEATURES)
 
 @dynamic _andFulfill;
 
 - (OCMStubRecorder * (^)(XCTestExpectation *))_andFulfill
 {
-    id (^theBlock)(XCTestExpectation *) = ^ (XCTestExpectation *expectation)
-    {
+    id (^theBlock)(XCTestExpectation *) = ^(XCTestExpectation *expectation) {
         return [self andFulfill:expectation];
     };
     return (id)[[theBlock copy] autorelease];

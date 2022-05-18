@@ -2,8 +2,7 @@
 //  WEGSegmentIntegrationFactory.m
 //  WebEngage
 //
-//  Created by Arpit on 25/10/16.
-//  Copyright © 2016 Saumitra R. Bhave. All rights reserved.
+//  Copyright (c) 2022 Webklipper Technologies Pvt Ltd. All rights reserved.
 //
 
 #import "WEGSegmentIntegrationFactory.h"
@@ -17,63 +16,62 @@
 @interface WEGSegmentIntegrationFactory ()
 @property(nonatomic, strong, readwrite) UIApplication *application;
 @property(nonatomic, strong, readwrite) NSDictionary *launchOptions;
-@property(nonatomic, strong, readwrite) id<WEGInAppNotificationProtocol>
-    notificationDelegate;
+@property(nonatomic, strong, readwrite) id<WEGInAppNotificationProtocol> notificationDelegate;
 @property(nonatomic, readwrite) BOOL autoAPNSRegister;
 @end
 
 @implementation WEGSegmentIntegrationFactory
 
 + (instancetype)sharedInstance {
-  static dispatch_once_t once;
-  static WEGSegmentIntegrationFactory *sharedInstance;
-  dispatch_once(&once, ^{
-    sharedInstance = [[self alloc] init];
-  });
-  return sharedInstance;
+    static dispatch_once_t once;
+    static WEGSegmentIntegrationFactory *sharedInstance;
+    dispatch_once(&once, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
 }
 
 + (instancetype)instanceWithApplication:(UIApplication *)application
                           launchOptions:(NSDictionary *)launchOptions {
-  return [self instanceWithApplication:application
-                         launchOptions:launchOptions
-                  notificationDelegate:nil
-                      autoAPNSRegister:YES];
+    return [self instanceWithApplication:application
+                           launchOptions:launchOptions
+                    notificationDelegate:nil
+                        autoAPNSRegister:YES];
 }
 
 + (instancetype)instanceWithApplication:(UIApplication *)application
                           launchOptions:(NSDictionary *)launchOptions
                        autoAPNSRegister:(BOOL)autoRegister {
-
-  return [self instanceWithApplication:application
-                         launchOptions:launchOptions
-                  notificationDelegate:nil
-                      autoAPNSRegister:autoRegister];
+    
+    return [self instanceWithApplication:application
+                           launchOptions:launchOptions
+                    notificationDelegate:nil
+                        autoAPNSRegister:autoRegister];
 }
 
 + (instancetype)instanceWithApplication:(UIApplication *)application
                           launchOptions:(NSDictionary *)launchOptions
                    notificationDelegate:
-                       (id<WEGInAppNotificationProtocol>)notificationDelegate {
-
-  return [self instanceWithApplication:application
-                         launchOptions:launchOptions
-                  notificationDelegate:notificationDelegate
-                      autoAPNSRegister:YES];
+(id<WEGInAppNotificationProtocol>)notificationDelegate {
+    
+    return [self instanceWithApplication:application
+                           launchOptions:launchOptions
+                    notificationDelegate:notificationDelegate
+                        autoAPNSRegister:YES];
 }
 
 + (instancetype)instanceWithApplication:(UIApplication *)application
                           launchOptions:(NSDictionary *)launchOptions
                    notificationDelegate:
-                       (id<WEGInAppNotificationProtocol>)notificationDelegate
+(id<WEGInAppNotificationProtocol>)notificationDelegate
                        autoAPNSRegister:(BOOL)autoRegister {
-  WEGSegmentIntegrationFactory *factory = [self sharedInstance];
-  factory.application = application;
-  factory.launchOptions = launchOptions;
-  factory.notificationDelegate = notificationDelegate;
-  factory.autoAPNSRegister = autoRegister;
-
-  return factory;
+    WEGSegmentIntegrationFactory *factory = [self sharedInstance];
+    factory.application = application;
+    factory.launchOptions = launchOptions;
+    factory.notificationDelegate = notificationDelegate;
+    factory.autoAPNSRegister = autoRegister;
+    
+    return factory;
 }
 
 - (id<SEGIntegration>)createWithSettings:(NSDictionary *)settings
@@ -116,7 +114,7 @@
 }
 
 - (NSString *)key {
-  return @"WebEngage";
+    return @"WebEngage";
 }
 
 @end
