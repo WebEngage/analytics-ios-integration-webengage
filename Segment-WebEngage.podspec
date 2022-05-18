@@ -20,6 +20,12 @@ Pod::Spec.new do |spec|
   spec.platform          = :ios
   spec.ios.deployment_target = '10.0'
 
+  # This is to remove simulator slice from checking pod lib lint
+  spec.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  
   spec.dependency 'WebEngage', '~> 5.2.4'
   spec.dependency 'Analytics'
 
