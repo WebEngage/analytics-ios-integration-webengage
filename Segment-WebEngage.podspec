@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = 'Segment-WebEngage'
-  spec.version      = '1.2.1'
+  spec.version      = '1.2.2'
 
   spec.summary      = 'WebEngage Integration for Segment\'s analytics-ios library'
   spec.description  = <<-DESC
@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   }
   spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
-  spec.dependency 'WebEngage', '~> 5.2.4'
+  spec.dependency 'WebEngage'
   spec.dependency 'Analytics'
 
 end
