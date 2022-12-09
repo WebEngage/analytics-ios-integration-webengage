@@ -18,13 +18,7 @@ Pod::Spec.new do |spec|
   spec.source            = { :git => 'https://github.com/WebEngage/analytics-ios-integration-webengage.git', :tag => spec.version.to_s }
   spec.source_files      = 'Segment-WebEngage/Classes/**/*'
   spec.platform          = :ios
-  spec.ios.deployment_target = '10.0'
-
-  # This is to remove simulator slice from checking pod lib lint
-  spec.pod_target_xcconfig = {
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
-  }
-  spec.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  spec.ios.deployment_target = '11.0'
   
   spec.dependency 'WebEngage'
   spec.dependency 'Analytics'
