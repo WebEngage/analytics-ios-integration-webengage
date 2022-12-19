@@ -85,6 +85,15 @@
     
     [self runOnMainQueueWithoutDeadlocking:^{
         NSString *licenceCode = settings[@"licenseCode"];
+        
+        
+        // Check if license code has been overridden or not
+        NSString *LicenseCodeFromInfoPlist = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"WEGLicenseCode"];
+        if ([LicenseCodeFromInfoPlist length] != 0){
+            SEGLog(@"WebEngage is getting initialised with an overridden LC, received from analytics: %@ but configured LC %@. If you wish to use %@ from analytics, kindly remove `WEGLicenseCode` from info.plist",licenceCode , LicenseCodeFromInfoPlist, licenceCode);
+            licenceCode = LicenseCodeFromInfoPlist;
+        }
+        
         isInited = [[WebEngage sharedInstance]
                     application:self.application
                     didFinishLaunchingWithOptions:@{
