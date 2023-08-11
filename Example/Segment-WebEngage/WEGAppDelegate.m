@@ -21,12 +21,10 @@
     //Register WebEngage Integration With Segment
     [SEGAnalytics debug:YES];
     [configuration use:[WEGSegmentIntegrationFactory instanceWithApplication:application launchOptions:launchOptions]];
-    
     // Or use the full blown version
     //[configuration use:[WEGSegmentIntegrationFactory instanceWithApplication:application launchOptions:launchOptions notificationDelegate:self autoAPNSRegister:@NO]];
     [SEGAnalytics setupWithConfiguration:configuration];
-    [[SEGAnalytics sharedAnalytics] identify:@"user1" traits:@{@"first_name":@"Bla Bla",@"birthday":[NSDate date],@"address":@{@"city":@"Mumbai",@"country":@"India"}}];
-    [[SEGAnalytics sharedAnalytics] track:@"From Segment" properties:@{@"prop1":@"val1",@"prop2":@"val2"}];
+ 
     return YES;
 }
 

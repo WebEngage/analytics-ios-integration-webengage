@@ -164,7 +164,7 @@
     if (wegPushOptInKey) {
         SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:PUSH "
                @"status:%@]",
-               [wegPushOptInKey boolValue]);
+               [wegPushOptInKey stringValue]);
         [user setOptInStatusForChannel:WEGEngagementChannelPush
                                 status:[wegPushOptInKey boolValue]];
     }
@@ -173,7 +173,7 @@
     if (wegSmsOptInKey) {
         SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:SMS "
                @"status:%@]",
-               [wegSmsOptInKey boolValue]);
+               [wegSmsOptInKey stringValue]);
         [user setOptInStatusForChannel:WEGEngagementChannelSMS
                                 status:[wegSmsOptInKey boolValue]];
     }
@@ -182,9 +182,27 @@
     if (wegEmailOptInKey) {
         SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:EMAIL "
                @"status:%@]",
-               [wegEmailOptInKey boolValue]);
+               [wegEmailOptInKey stringValue]);
         [user setOptInStatusForChannel:WEGEngagementChannelEmail
                                 status:[wegEmailOptInKey boolValue]];
+    }
+    
+    id wegWhatsAppOptInKey = integration[WEG_WHATSAPP_OPT_IN_KEY];
+    if (wegWhatsAppOptInKey) {
+        SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:WhatsApp "
+               @"status:%@]",
+               [wegWhatsAppOptInKey stringValue]);
+        [user setOptInStatusForChannel:WEGEngagementChannelEmail
+                                status:[wegWhatsAppOptInKey boolValue]];
+    }
+    
+    id wegInAppOptInKey = integration[WEG_INAPP_OPT_IN_KEY];
+    if (wegInAppOptInKey) {
+        SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:InApp "
+               @"status:%@]",
+               [wegInAppOptInKey stringValue]);
+        [user setOptInStatusForChannel:WEGEngagementChannelEmail
+                                status:[wegInAppOptInKey boolValue]];
     }
     
     // As per https://segment.com/docs/spec/identify/#traits, address is should be
