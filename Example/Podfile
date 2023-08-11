@@ -5,7 +5,7 @@ platform :ios, '11.0'
 
 target 'Segment-WebEngage_Example' do
 use_frameworks!
-  pod 'Segment-WebEngage'#, :path => '../'
+  pod 'Segment-WebEngage', :path => '../'
 
   target 'Segment-WebEngage_Tests' do
     inherit! :search_paths

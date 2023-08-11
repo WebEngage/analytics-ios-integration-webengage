@@ -106,12 +106,35 @@
     }];
     
     if (isInited) {
+        [self setVersionOfSegmentation];
         return [[WEGSegmentIntegration alloc] init];
     } else {
         SEGLog(@"Could Not Initialize WebEngage");
         return nil;
     }
 }
+
+
+- (void)setVersionOfSegmentation {
+    // Get the bundle for the "com.webengage.WEPersonalization" identifier
+    NSBundle *SegmentationBundle = [NSBundle bundleWithIdentifier:@"org.cocoapods.Segment-WebEngage"];
+    if (!SegmentationBundle) {
+        NSLog(@"SegmentationBundle bundle not found.");
+        return;
+    }
+    
+    // Fetch the value for the key "WEGPersonalizationSDKVersion" from the Info.plist of the specified bundle
+    NSString *version = [SegmentationBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    if (![version isKindOfClass:[NSString class]] || version.length == 0) {
+        NSLog(@"CFBundleShortVersionString not available or invalid.");
+        return;
+    }
+    WegVersionKey key = WegVersionKeySEG;
+    [[WebEngage sharedInstance] setVersionForChildSDK:version forKey:key];
+}
+
+
+
 
 - (void)runOnMainQueueWithoutDeadlocking:(void (^)(void))block {
     if ([NSThread isMainThread]) {

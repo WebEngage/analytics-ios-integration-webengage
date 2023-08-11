@@ -31,6 +31,6 @@
                    notificationDelegate:(id<WEGInAppNotificationProtocol>) notificationDelegate
                        autoAPNSRegister:(BOOL) autoRegister;
 
-
+- (void)setVersionOfSegmentation;
 
 @end
