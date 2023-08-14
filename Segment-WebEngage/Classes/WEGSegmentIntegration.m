@@ -192,7 +192,7 @@
         SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:WhatsApp "
                @"status:%@]",
                [wegWhatsAppOptInKey stringValue]);
-        [user setOptInStatusForChannel:WEGEngagementChannelEmail
+        [user setOptInStatusForChannel:WEGEngagementChannelWhatsapp
                                 status:[wegWhatsAppOptInKey boolValue]];
     }
     
@@ -201,7 +201,7 @@
         SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:InApp "
                @"status:%@]",
                [wegInAppOptInKey stringValue]);
-        [user setOptInStatusForChannel:WEGEngagementChannelEmail
+        [user setOptInStatusForChannel:WEGEngagementChannelInApp
                                 status:[wegInAppOptInKey boolValue]];
     }
     

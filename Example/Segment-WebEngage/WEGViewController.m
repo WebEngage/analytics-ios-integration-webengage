@@ -55,8 +55,6 @@
 
 - (void)login {
     // Your login code
-    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:@"YOUR_WRITE_KEY"];
-    [SEGAnalytics setupWithConfiguration:configuration];
     
     NSString *cuid = self.textFieldForCUID.text;
     
@@ -65,13 +63,14 @@
             @"WebEngage": @{
                 @"we_email_opt_in": @YES,
                 @"we_whatsapp_opt_in": @YES,
-                @"we_inapp_opt_in": @YES
+                @"we_inapp_opt_in": @YES,
+                @"we_sms_opt_in" : @YES
             }
         }
     };
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[SEGAnalytics sharedAnalytics] identify:cuid traits:@{@"first_name":@"Bla Bla",@"birthday":[NSDate date],@"address":@{@"city":@"Mumbai",@"country":@"India"}} options:integrations];
+        [[SEGAnalytics sharedAnalytics] identify:cuid traits:@{@"first_name":@"Bla Bla",@"email":@"test@gmail.com",@"phone":@"9876543210",@"birthday":[NSDate date],@"address":@{@"city":@"Mumbai",@"country":@"India"}} options:integrations];
         [[SEGAnalytics sharedAnalytics] track:@"From Segment" properties:@{@"prop1":@"val1",@"prop2":@"val2"}];
     });
 }
