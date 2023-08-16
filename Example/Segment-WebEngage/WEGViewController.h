@@ -7,7 +7,12 @@
 //
 
 @import UIKit;
+@import Segment_WebEngage;
 
 @interface WEGViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet UITextField *textFieldForCUID;
+@property (weak, nonatomic) IBOutlet UIButton *logInButtonAction;
+@property (weak, nonatomic) IBOutlet UIButton *logOutButtonAction;
 
 @end
