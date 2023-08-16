@@ -28,6 +28,9 @@
 #define WEG_SMS_OPT_IN_KEY @"we_sms_opt_in"
 #define WEG_EMAIL_OPT_IN_KEY @"we_email_opt_in"
 #define WEG_SEGMENT_ADDRESS_KEY @"address"
+#define WEG_WHATSAPP_OPT_IN_KEY @"we_whatsapp_opt_in"
+#define WEG_INAPP_OPT_IN_KEY @"we_inapp_opt_in"
+
 
 
 

@@ -163,7 +163,7 @@
     id wegPushOptInKey = integration[WEG_PUSH_OPT_IN_KEY];
     if (wegPushOptInKey) {
         SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:PUSH "
-               @"status:%@]",
+               @"status:%d]",
                [wegPushOptInKey boolValue]);
         [user setOptInStatusForChannel:WEGEngagementChannelPush
                                 status:[wegPushOptInKey boolValue]];
@@ -172,7 +172,7 @@
     id wegSmsOptInKey = integration[WEG_SMS_OPT_IN_KEY];
     if (wegSmsOptInKey) {
         SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:SMS "
-               @"status:%@]",
+               @"status:%d]",
                [wegSmsOptInKey boolValue]);
         [user setOptInStatusForChannel:WEGEngagementChannelSMS
                                 status:[wegSmsOptInKey boolValue]];
@@ -181,10 +181,28 @@
     id wegEmailOptInKey = integration[WEG_EMAIL_OPT_IN_KEY];
     if (wegEmailOptInKey) {
         SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:EMAIL "
-               @"status:%@]",
+               @"status:%d]",
                [wegEmailOptInKey boolValue]);
         [user setOptInStatusForChannel:WEGEngagementChannelEmail
                                 status:[wegEmailOptInKey boolValue]];
+    }
+    
+    id wegWhatsAppOptInKey = integration[WEG_WHATSAPP_OPT_IN_KEY];
+    if (wegWhatsAppOptInKey) {
+        SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:WhatsApp "
+               @"status:%d]",
+               [wegWhatsAppOptInKey boolValue]);
+        [user setOptInStatusForChannel:WEGEngagementChannelWhatsapp
+                                status:[wegWhatsAppOptInKey boolValue]];
+    }
+    
+    id wegInAppOptInKey = integration[WEG_INAPP_OPT_IN_KEY];
+    if (wegInAppOptInKey) {
+        SEGLog(@"[[WebEngage sharedInstance].user setOptInStatusForChannel:InApp "
+               @"status:%d]",
+               [wegInAppOptInKey boolValue]);
+        [user setOptInStatusForChannel:WEGEngagementChannelInApp
+                                status:[wegInAppOptInKey boolValue]];
     }
     
     // As per https://segment.com/docs/spec/identify/#traits, address is should be
