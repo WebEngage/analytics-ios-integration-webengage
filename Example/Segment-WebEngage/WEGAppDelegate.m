@@ -13,14 +13,20 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:@"ZC2XY5cuS0pEmjYHAvJHs91NyymJR1hL"];
+    //ZC2XY5cuS0pEmjYHAvJHs91NyymJR1hL
+    SEGAnalyticsConfiguration *configuration = [SEGAnalyticsConfiguration configurationWithWriteKey:@"gaZvQjMOjy274ROC3S5UfleBR8VvRyM8"];
     
     //Additional Segment Configuration
     configuration.trackApplicationLifecycleEvents = NO; // Enable this to record certain application events automatically!
     configuration.recordScreenViews = NO; // Enable this to record screen views automatically!
     //Register WebEngage Integration With Segment
+    
+    WEGSegmentIntegrationFactory *config = [WEGSegmentIntegrationFactory instanceWithApplication:application launchOptions:launchOptions];
+    
+    
     [SEGAnalytics debug:YES];
-    [configuration use:[WEGSegmentIntegrationFactory instanceWithApplication:application launchOptions:launchOptions]];
+    [configuration use:config];
+    
     // Or use the full blown version
     //[configuration use:[WEGSegmentIntegrationFactory instanceWithApplication:application launchOptions:launchOptions notificationDelegate:self autoAPNSRegister:@NO]];
     [SEGAnalytics setupWithConfiguration:configuration];
